@@ -62,8 +62,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Insurance Management</h4>
-                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ List of Insurances</span>
+                <h4 class="content-title mb-0 my-auto">{{ __('messages.Insurance') }}</h4>
+                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('messages.ListofInsurances') }}</span>
             </div>
         </div>
     </div>
@@ -74,8 +74,9 @@
     @php $i = 1; @endphp
     @include('Dashboard.messages_allert')
 
+    <!-- زر لإضافة تأمين جديد -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">
-        Add Insurance
+        {{ __('messages.add_insurance') }}
     </button>
 
     <br><br>
@@ -85,7 +86,7 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0">Insurance Table</h4>
+                        <h4 class="card-title mg-b-0">{{ __('messages.insurance_table') }}</h4>
                         <i class="mdi mdi-dots-horizontal text-gray"></i>
                     </div>
                 </div>
@@ -96,15 +97,14 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Company Name</th>
-                                <th>Company Code</th>
-                                <th>Email</th>
-                                <th>Rate</th>
-                                <th>Status</th>
-                                <th>Descriptions</th>
-                                <th>Created At</th>
-
-                                <th>Actions</th>
+                                <th>{{ __('messages.company_name') }}</th>
+                                <th>{{ __('messages.company_code') }}</th>
+                                <th>{{ __('messages.email') }}</th>
+                                <th>{{ __('messages.rate') }}</th>
+                                <th>{{ __('messages.status') }}</th>
+                                <th>{{ __('messages.descriptions') }}</th>
+                                <th>{{ __('messages.created_at') }}</th>
+                                <th>{{ __('messages.actions') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -116,49 +116,46 @@
                                     <td>{{ $insurance->company_email }}</td>
                                     <td>{{ $insurance->company_rate }}</td>
                                     <td style="background-color: {{ $insurance->status == 1 ? 'green' : 'red' }}; color: white;">
-                                        {{ $insurance->status==1 ? "active":"Inactive" }}
+                                        {{ $insurance->status==1 ? __('messages.active') : __('messages.inactive') }}
                                     </td>
-                                    <td>{{$insurance->notes}}</td>
-
+                                    <td>{{ $insurance->notes }}</td>
                                     <td>{{ $insurance->created_at->diffForHumans() }}</td>
                                     <td>
                                         <div class="dropdown">
                                             <button class="btn btn-secondary dropdown-toggle" type="button"
                                                     id="dropdownMenuButton{{$insurance->id}}" data-toggle="dropdown"
                                                     aria-haspopup="true" aria-expanded="false">
-                                                Actions
+                                                {{ __('messages.actions') }}
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="#update{{$insurance->id}}">
-                                                <!-- Edit Button -->
+                                                <!-- زر التعديل -->
                                                 <a class="dropdown-item edit-item" href="#" data-toggle="modal"
                                                    data-target="#updateInsuranceModal{{$insurance->id}}">
-                                                    <i class="fas fa-edit"></i> Edit
+                                                    <i class="fas fa-edit"></i> {{ __('messages.edit') }}
                                                 </a>
-                                                <!-- Delete Button -->
+                                                <!-- زر الحذف -->
                                                 <a class="dropdown-item delete-item" href="#" data-toggle="modal"
                                                    data-target="#deleteInsuranceModal{{$insurance->id}}">
-                                                    <i class="fas fa-trash"></i> Delete
+                                                    <i class="fas fa-trash"></i> {{ __('messages.delete') }}
                                                 </a>
                                             </div>
                                         </div>
                                     </td>
-
-
                                 </tr>
                                 @include('Dashboard.Insurances.update')
                                 @include('Dashboard.Insurances.delete')
                             @endforeach
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @include('Dashboard.Insurances.add')
 
+    @include('Dashboard.Insurances.add')
 @endsection
+
 
 @section('js')
     <!-- Internal Data tables -->

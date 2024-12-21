@@ -16,8 +16,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Pages</h4><span
-                        class="text-muted mt-1 tx-13 mr-2 mb-0">/ Empty</span>
+                <h4 class="content-title mb-0 my-auto">{{__('doctors.doctors')}}</h4><span
+                        class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{__('doctors.ALL')}}</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
@@ -57,7 +57,7 @@
     @endphp
     @include('Dashboard.messages_allert')
     <button type="button" class="btn btn-primary" onclick="func1()">
-        Create Doctor
+        {{__('doctors.create_doctor')}}
     </button>
     <button type="button" class="btn btn-danger" id="btn_delete_all">{{trans('doctors.delete_select')}}</button>
     </div>
@@ -75,13 +75,7 @@
         <!--div-->
         <div class="col-xl-12">
             <div class="card mg-b-20">
-                <div class="card-header pb-0">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0">Bordered Table</h4>
-                        <i class="mdi mdi-dots-horizontal text-gray"></i>
-                    </div>
-                    <p class="tx-12 tx-gray-500 mb-2">Example of Valex Bordered Table.. <a href="">Learn more</a></p>
-                </div>
+
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example" class="table key-buttons text-md-nowrap">
@@ -91,7 +85,7 @@
                                 <th class="border-bottom-0">
                                     <div class="row">
                                         <div class="col-md-11">
-                                            Image
+                                            {{ trans('doctors.image') }}
                                         </div>
                                         <div class="col-md-1">
                                             <input name="select_all" id="example-select-all" type="checkbox"
@@ -100,14 +94,13 @@
 
                                     </div>
                                 </th>
-
-                                <th class="border-bottom-0">Doctor Name</th>
-                                <th class="border-bottom-0">Email</th>
-                                <th class="border-bottom-0">Section Name</th>
-                                <th class="border-bottom-0">Activation</th>
-                                <th class="border-bottom-0">Appointments</th>
-                                <th class="border-bottom-0">Phone Number</th>
-                                <th class="border-bottom-0">Operations</th>
+                                <th>{{ trans('doctors.name') }}</th>
+                                <th>{{ trans('doctors.email') }}</th>
+                                <th>{{ trans('doctors.section') }}</th>
+                                <th>{{ trans('doctors.status') }}</th>
+                                <th>{{ trans('doctors.appointments') }}</th>
+                                <th>{{ trans('doctors.phone') }}</th>
+                                <th>{{ trans('doctors.actions') }}</th>
 
                             </tr>
                             </thead>
@@ -134,8 +127,8 @@
                                     <td>{{$doctor->email}}</td>
                                     <td>{{$doctor->section->name}}</td>
                                     <td>
-                                        <div class="dot-label bg-{{$doctor->status == 1 ? 'success':'danger'}} ml-1"></div>
-                                        {{$doctor->status == 1 ? "Enable":"Not Enable"}}
+                                        <div class="dot-label bg-{{ $doctor->status == 1 ? 'success' : 'danger' }} ml-1"></div>
+                                        {{ $doctor->status == 1 ? trans('doctors.enabled') : trans('doctors.disabled') }}
                                     </td>
                                     <td>
                                         {{ implode(', ', $doctor->appointments->pluck('name')->toArray()) }}
@@ -145,38 +138,28 @@
                                     <td>{{$doctor->phone_number}}</td>
 
                                     <td>
-
-
                                         <div class="dropdown">
                                             <button class="btn btn-secondary dropdown-toggle" type="button"
                                                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false">
-                                                Operations
+                                                {{ trans('doctors.actions') }}
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <button type="button" class="btn btn-primary dropdown-item"
-                                                        onclick="func2()">
-                                                    <strong style="color: #0a7ffb"> Update Doctor Information</strong>
-                                                </button>
-                                                <script>
-                                                    function func2() {
-                                                        window.location.href = ('{{route('doctor.edit',['id'=>$doctor->id])}}');
-                                                    }
-                                                </script>
-
-                                                <button type="button" class="btn btn-danger dropdown-item"
-                                                        data-toggle="modal" data-target="#delete{{$doctor->id}}">
-                                                    <strong style="color:red"> Delete The Doctor</strong>
+                                                        onclick="window.location.href='{{ route('doctor.edit', ['id' => $doctor->id]) }}'">
+                                                    <strong style="color: #0a7ffb">{{ trans('doctors.update_info') }}</strong>
                                                 </button>
                                                 <button type="button" class="btn btn-danger dropdown-item"
-                                                        data-toggle="modal"
-                                                        data-target="#update_password{{ $doctor->id }}">
-                                                    <strong style="color:black"> Change Password</strong>
+                                                        data-toggle="modal" data-target="#delete{{ $doctor->id }}">
+                                                    <strong style="color:red">{{ trans('doctors.delete') }}</strong>
                                                 </button>
                                                 <button type="button" class="btn btn-danger dropdown-item"
-                                                        data-toggle="modal"
-                                                        data-target="#update_status{{ $doctor->id }}">
-                                                    <strong style="color:lightseagreen"> Change Status</strong>
+                                                        data-toggle="modal" data-target="#update_password{{ $doctor->id }}">
+                                                    <strong style="color:black">{{ trans('doctors.change_password') }}</strong>
+                                                </button>
+                                                <button type="button" class="btn btn-danger dropdown-item"
+                                                        data-toggle="modal" data-target="#update_status{{ $doctor->id }}">
+                                                    <strong style="color:lightseagreen">{{ trans('doctors.change_status') }}</strong>
                                                 </button>
                                             </div>
                                         </div>

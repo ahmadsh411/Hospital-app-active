@@ -15,7 +15,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Invoices</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Doctor Invoices</span>
+                <h4 class="content-title mb-0 my-auto">{{ __('messages.edit') }}</h4>
+                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('messages.ray') }}</span>
             </div>
         </div>
     </div>
@@ -24,13 +25,12 @@
 
 @section('content')
 
-    <form method="POST" action="{{ route('rays.update' , ['id' => $ray->id]) }}" enctype="multipart/form-data">
-
+    <form method="POST" action="{{ route('rays.update', ['id' => $ray->id]) }}" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <label for="editInput">تعديل الحقل</label>
+            <label for="editInput">{{ __('messages.edit_field') }}</label>
             <textarea type="text" class="form-control" name="description" id="editInput"
-                      placeholder="أدخل التعديلات">{{ $ray->description }}</textarea>
+                      placeholder="{{ __('messages.enter_edits') }}">{{ $ray->description }}</textarea>
             <input type="hidden" name="invoice_id" value="{{ $ray->invoice->id }}">
             <input type="hidden" name="doctor_id" value="{{ $ray->doctor->id }}">
             <input type="hidden" name="patient_id" value="{{ $ray->patient->id }}">
@@ -39,7 +39,7 @@
 
         <div class="form-group">
             <label for="image">
-                <i class="fas fa-upload"></i> رفع صورة الأشعة
+                <i class="fas fa-upload"></i> {{ __('messages.upload_ray_image') }}
             </label>
             <input type="file" class="form-control" id="image" name="image" accept="image/*"
                    onchange="previewImage(event)">
@@ -48,26 +48,25 @@
         <!-- مكان عرض الصورة الحالية -->
         <div class="form-group text-center">
             @if($ray->images()->count() > 0)
-                    @foreach($ray->images as $image)
-                        @if($image->type==0)
-                    <img id="imagePreview"
-                         src="{{ asset('Dashboard/img/x-rays/'.$ray->patient->name.'/send/'.$ray->id.'/'.$ray->images->first()->filename) }}"
-                         alt="صورة الأشعة الحالية"
-                         style="max-width: 100%; height: auto; border: 2px solid #ddd; padding: 5px; margin-top: 10px;">
+                @foreach($ray->images as $image)
+                    @if($image->type == 0)
+                        <img id="imagePreview"
+                             src="{{ asset('Dashboard/img/x-rays/' . $ray->patient->name . '/send/' . $ray->id . '/' . $ray->images->first()->filename) }}"
+                             alt="{{ __('messages.current_ray_image') }}"
+                             style="max-width: 100%; height: auto; border: 2px solid #ddd; padding: 5px; margin-top: 10px;">
                     @endif
-                        @endforeach
+                @endforeach
             @else
-                <img id="imagePreview" src="" alt="معاينة الصورة"
+                <img id="imagePreview" src="" alt="{{ __('messages.image_preview') }}"
                      style="max-width: 100%; height: auto; display: none; border: 2px solid #ddd; padding: 5px; margin-top: 10px;">
             @endif
         </div>
 
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
-            <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('messages.cancel') }}</button>
+            <button type="submit" class="btn btn-primary">{{ __('messages.save_changes') }}</button>
         </div>
     </form>
-
 @endsection
 
 @section('js')

@@ -11,9 +11,10 @@
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between align-items-center mb-4">
         <div class="left-content">
-            <h2 class="main-content-title tx-24 mb-1">Hi, welcome back!</h2>
-            <p class="text-muted mb-0">Welcome {{ auth('admin')->user()->name }}!</p>
+            <h2 class="main-content-title tx-24 mb-1">{{ __('breadcrumb.greeting') }}</h2>
+            <p class="text-muted mb-0">{{ __('breadcrumb.welcome_message', ['name' => auth('admin')->user()->name]) }}</p>
         </div>
+
         <div class="main-dashboard-header-center text-center">
 
 
@@ -42,7 +43,7 @@
 
         <div class="main-dashboard-header-right">
             <div class="card card-body p-3 shadow-sm">
-                <label class="tx-13 mb-2 font-weight-bold">Customer Ratings</label>
+                <label class="tx-13 mb-2 font-weight-bold">{{ __('breadcrumb.customer_ratings') }}</label>
                 <div class="d-flex align-items-center">
                     <div class="main-star me-2">
                         <!-- Five Stars -->
@@ -78,7 +79,7 @@
                     </span>
                             <div class="ml-3">
                                 <h4 class="mb-1 text-white tx-20 font-weight-bold">
-                                    <span>Sections :</span> {{ \App\Models\Sections\Section::all()->count() }}
+                                    <span>{{ __('dashboard.sections') }}:</span> {{ \App\Models\Sections\Section::all()->count() }}
                                 </h4>
                             </div>
                         </div>
@@ -118,7 +119,7 @@
                     </span>
                             <div class="ml-3">
                                 <h4 class="mb-1 text-white tx-20 font-weight-bold" style="margin-left: 15px;">
-                                    <span>Doctors:</span> {{ \App\Models\Doctors\Doctor::all()->count() }}
+                                    <span>{{ __('dashboard.doctors') }}:</span> {{ \App\Models\Doctors\Doctor::all()->count() }}
                                 </h4>
                             </div>
                         </div>
@@ -158,8 +159,7 @@
                     </span>
                             <div class="ml-3">
                                 <h4 class="mb-1 text-white tx-20 font-weight-bold" style="margin-left: 15px;">
-                                    Patient: {{ \App\Models\Patients\Patient::all()->count() }}
-                                </h4>
+                                    <span>{{ __('dashboard.patients') }}:</span> {{ \App\Models\Patients\Patient::all()->count() }}                                 </h4>
                             </div>
                         </div>
                     </div>
@@ -198,7 +198,7 @@
                     </span>
                             <div class="ml-3">
                                 <h4 class="mb-1 text-white tx-20 font-weight-bold">
-                                    <span>M/Services :</span> {{ \App\Models\Service\SingleService::all()->count() + \App\Models\Service\MultiService::all()->count()}}
+                                    <span>{{ __('dashboard.services') }}:</span> {{ \App\Models\Service\SingleService::all()->count() + \App\Models\Service\MultiService::all()->count() }}
                                 </h4>
                             </div>
                         </div>
@@ -248,7 +248,7 @@
                     </span>
                             <div class="ml-3">
                                 <h4 class="mb-1 text-white tx-20 font-weight-bold">
-                                    <span>Employe :</span> {{ \App\Models\Staffs\Staff::all()->count() }}
+                                    <span>{{ __('dashboard.employees') }}:</span> {{ \App\Models\Staffs\Staff::all()->count() }}
                                 </h4>
                             </div>
                         </div>
@@ -290,7 +290,7 @@
                     </span>
                             <div class="ml-3">
                                 <h4 class="mb-1 text-white tx-20 font-weight-bold">
-                                    <span>Insurance :</span> {{\App\Models\Insurances\Insurance::all()->count() }}
+                                    <span>{{ __('dashboard.insurance') }}:</span> {{ \App\Models\Insurances\Insurance::all()->count() }}
                                 </h4>
                             </div>
                         </div>
@@ -331,7 +331,7 @@
                     </span>
                             <div class="ml-3">
                                 <h4 class="mb-1 text-white tx-20 font-weight-bold">
-                                    <span>Ambulance :</span> {{\App\Models\Ambulances\Ambulance::all()->count() }}
+                                    <span>{{ __('dashboard.ambulance') }}:</span> {{ \App\Models\Ambulances\Ambulance::all()->count() }}
                                 </h4>
                             </div>
                         </div>
@@ -372,7 +372,7 @@
                     </span>
                             <div class="ml-3">
                                 <h4 class="mb-1 text-white tx-20 font-weight-bold">
-                                    <span>Invoice :</span> {{\App\Models\Invoices\OneTable\Invoice::all()->count() }}
+                                    <span>{{ __('dashboard.invoices') }}:</span> {{ \App\Models\Invoices\OneTable\Invoice::all()->count() }}
                                 </h4>
                             </div>
                         </div>
@@ -410,32 +410,32 @@
             <div class="card">
                 <div class="bg-transparent card-header pd-b-0 pd-t-20 bd-b-0">
                     <div class="d-flex justify-content-between">
-                        <h4 class="mb-0 card-title">Fund Schedules</h4>
+                        <h4 class="mb-0 card-title">{{ __('fund_schedule.title') }}</h4>
                         <i class="mdi mdi-dots-horizontal text-gray"></i>
                     </div>
-                    <p class="mb-0 tx-12 text-muted">Fund Schedule Status and Tracking. Track your fund schedules from creation to completion. To begin, enter your schedule ID.</p>
+                    <p class="mb-0 tx-12 text-muted">{{ __('fund_schedule.description') }}</p>
                 </div>
                 <div class="card-body">
                     <div class="total-revenue">
                         <div>
-                            <h4>{{\App\Models\Boxes\Fund_Schedule::all()->sum('credit')}}$</h4>
-                            <label><span class="bg-primary"></span>Credits</label>
+                            <h4>{{ \App\Models\Boxes\Fund_Schedule::all()->sum('credit') }}$</h4>
+                            <label><span class="bg-primary"></span>{{ __('fund_schedule.credits') }}</label>
                         </div>
                         <div>
-                            <h4>{{\App\Models\Boxes\Fund_Schedule::all()->sum('debit')}}$</h4>
-                            <label><span class="bg-danger"></span>Debits</label>
+                            <h4>{{ \App\Models\Boxes\Fund_Schedule::all()->sum('debit') }}$</h4>
+                            <label><span class="bg-danger"></span>{{ __('fund_schedule.debits') }}</label>
                         </div>
                         <div>
-                            <h4>{{\App\Models\Boxes\PatientAccount::all()->sum('debit')}}$</h4>
-                            <label><span class="bg-warning"></span>Pending</label>
+                            <h4>{{ \App\Models\Boxes\PatientAccount::all()->sum('debit') }}$</h4>
+                            <label><span class="bg-warning"></span>{{ __('fund_schedule.pending') }}</label>
                         </div>
                     </div>
                     <div id="bar" class="mt-4 sales-bar"></div>
                 </div>
             </div>
         </div>
-
     </div>
+
     <!-- row closed -->
 
     <!-- row opened -->
@@ -448,13 +448,26 @@
                             <div class="tabs-menu1">
                                 <!-- Tabs -->
                                 <ul class="nav panel-tabs main-nav-line">
-                                    <li class="nav-item"><a href="#patientInfo" class="nav-link active" data-toggle="tab">معلومات المريض</a></li>
-                                    <li class="nav-item"><a href="#invoices" class="nav-link" data-toggle="tab">الفواتير</a></li>
-                                    <li class="nav-item"><a href="#payments" class="nav-link" data-toggle="tab">المدفوعات</a></li>
-                                    <li class="nav-item"><a href="#accountStatement" class="nav-link" data-toggle="tab">كشف حساب</a></li>
-                                    <li class="nav-item"><a href="#xray" class="nav-link" data-toggle="tab">الاشعه</a></li>
-                                    <li class="nav-item"><a href="#laboratory" class="nav-link" data-toggle="tab">المختبر</a></li>
+                                    <li class="nav-item">
+                                        <a href="#patientInfo" class="nav-link active" data-toggle="tab">{{ __('tabs.patient_info') }}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#invoices" class="nav-link" data-toggle="tab">{{ __('tabs.invoices') }}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#payments" class="nav-link" data-toggle="tab">{{ __('tabs.payments') }}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#accountStatement" class="nav-link" data-toggle="tab">{{ __('tabs.account_statement') }}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#xray" class="nav-link" data-toggle="tab">{{ __('tabs.xray') }}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#laboratory" class="nav-link" data-toggle="tab">{{ __('tabs.laboratory') }}</a>
+                                    </li>
                                 </ul>
+
                             </div>
                         </div>
                         <div class="panel-body tabs-menu-body main-content-body-right border-top-0 border">
@@ -468,25 +481,25 @@
                                             <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>اسم المريض</th>
-                                                <th>رقم الهاتف</th>
-                                                <th>البريد الإلكتروني</th>
-                                                <th>تاريخ الميلاد</th>
-                                                <th>النوع</th>
-                                                <th>فصيلة الدم</th>
+                                                <th>{{ __('tabs.patient_name') }}</th>
+                                                <th>{{ __('tabs.phone') }}</th>
+                                                <th>{{ __('tabs.email') }}</th>
+                                                <th>{{ __('tabs.date_of_birth') }}</th>
+                                                <th>{{ __('tabs.gender') }}</th>
+                                                <th>{{ __('tabs.blood_type') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             @foreach(\App\Models\Patients\Patient::latest()->take(5)->get() as $patient)
-                                            <tr>
-                                                <td>{{$loop->iteration}}</td>
-                                                <td>{{ $patient->name }}</td>
-                                                <td>{{ $patient->phone }}</td>
-                                                <td>{{ $patient->email }}</td>
-                                                <td>{{ $patient->date_of_birth }}</td>
-                                                <td>{{ $patient->gender_id == 1 ? 'ذكر' : 'أنثى' }}</td>
-                                                <td>{{ $patient->bloodtype->type }}</td>
-                                            </tr>
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $patient->name }}</td>
+                                                    <td>{{ $patient->phone }}</td>
+                                                    <td>{{ $patient->email }}</td>
+                                                    <td>{{ $patient->date_of_birth }}</td>
+                                                    <td>{{ $patient->gender_id == 1 ? __('tabs.male') : __('tabs.female') }}</td>
+                                                    <td>{{ $patient->bloodtype->type }}</td>
+                                                </tr>
                                             @endforeach
                                             </tbody>
                                         </table>
@@ -500,10 +513,10 @@
                                             <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>اسم الخدمة</th>
-                                                <th>تاريخ الفاتورة</th>
-                                                <th>الإجمالي مع الضريبة</th>
-                                                <th>نوع الفاتورة</th>
+                                                <th>{{ __('tabs.service_name') }}</th>
+                                                <th>{{ __('tabs.invoice_date') }}</th>
+                                                <th>{{ __('tabs.total_with_tax') }}</th>
+                                                <th>{{ __('tabs.invoice_type') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -513,11 +526,11 @@
                                                     <td>{{ $invoice->service ? $invoice->service->name : $invoice->group->name }}</td>
                                                     <td>{{ $invoice->invoice_date }}</td>
                                                     <td>{{ $invoice->tot_with_tax }}</td>
-                                                    <td>{{ $invoice->type == 1 ? 'نقدي' : 'آجل' }}</td>
+                                                    <td>{{ $invoice->type == 1 ? __('tabs.cash') : __('tabs.credit') }}</td>
                                                 </tr>
                                             @endforeach
                                             <tr>
-                                                <th colspan="4" class="alert alert-success">الإجمالي</th>
+                                                <th colspan="4" class="alert alert-success">{{ __('tabs.total') }}</th>
                                                 <td class="alert alert-primary">{{ number_format(\App\Models\Invoices\OneTable\Invoice::all()->sum('tot_with_tax'), 2) }}</td>
                                             </tr>
                                             </tbody>
@@ -525,217 +538,69 @@
                                     </div>
                                 </div>
 
-                                <!-- Additional Tabs like Payments, Account Statement, X-Ray, Laboratory, etc. -->
+                                <!-- Payments Tab -->
                                 <div class="tab-pane" id="payments">
                                     <div class="table-responsive">
                                         <table class="table table-hover text-md-nowrap text-center">
                                             <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>تاريخ الاضافه</th>
-                                                <th>اسم المريض</th>
-                                                <th>المبلغ</th>
-                                                <th>البيان</th>
+                                                <th>{{ __('tabs.payment_date') }}</th>
+                                                <th>{{ __('tabs.patient_name') }}</th>
+                                                <th>{{ __('tabs.amount') }}</th>
+                                                <th>{{ __('tabs.description') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach(\App\Models\Boxes\Receipt::latest()->take(5)->get() as $receipt_account)
+                                            @foreach(\App\Models\Boxes\Receipt::latest()->take(5)->get() as $receipt)
                                                 <tr>
-                                                    <td>{{$loop->iteration}}</td>
-                                                    <td>{{$receipt_account->date}}</td>
-                                                    <td>{{$receipt_account->patient->name}}</td>
-                                                    <td>{{$receipt_account->debit}}</td>
-                                                    <td>{{$receipt_account->description}}</td>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $receipt->date }}</td>
+                                                    <td>{{ $receipt->patient->name }}</td>
+                                                    <td>{{ $receipt->debit }}</td>
+                                                    <td>{{ $receipt->description }}</td>
                                                 </tr>
-                                                <br>
                                             @endforeach
                                             <tr>
-                                                <th scope="row" class="alert alert-success">الاجمالي
-                                                </th>
-                                                <td colspan="4"
-                                                    class="alert alert-primary">{{ number_format( \App\Models\Boxes\Receipt::latest()->take(5)->get()->sum('debit') , 2)}}</td>
+                                                <th colspan="4" class="alert alert-success">{{ __('tabs.total') }}</th>
+                                                <td class="alert alert-primary">{{ number_format(\App\Models\Boxes\Receipt::sum('debit'), 2) }}</td>
                                             </tr>
                                             </tbody>
                                         </table>
                                     </div>
-
                                 </div>
 
+                                <!-- Account Statement Tab -->
                                 <div class="tab-pane" id="accountStatement">
                                     <div class="table-responsive">
-                                        <table class="table table-hover text-md-nowrap text-center"
-                                               id="example1">
+                                        <table class="table table-hover text-md-nowrap text-center">
                                             <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>تاريخ الاضافه</th>
-                                                <th>اسم المريض</th>
-                                                <th>الوصف</th>
-                                                <th>مدبن</th>
-                                                <th>دائن</th>
-                                                <th>الرصيد النهائي</th>
+                                                <th>{{ __('tabs.entry_date') }}</th>
+                                                <th>{{ __('tabs.patient_name') }}</th>
+                                                <th>{{ __('tabs.description') }}</th>
+                                                <th>{{ __('tabs.debit') }}</th>
+                                                <th>{{ __('tabs.credit') }}</th>
+                                                <th>{{ __('tabs.final_balance') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach(\App\Models\Boxes\PatientAccount::latest()->take(5)->get() as $Patient_account)
+                                            @foreach(\App\Models\Boxes\PatientAccount::latest()->take(5)->get() as $account)
                                                 <tr>
-                                                    <td>{{$loop->iteration}}</td>
-                                                    <td>{{$Patient_account->date}}</td>
-                                                    <td>{{$Patient_account->patient->name}}</td>
-                                                    <td>
-                                                        @if($Patient_account->single_invoice_id == true)
-                                                            {{$Patient_account->singleInvoice->service->name}}
-
-                                                        @elseif($Patient_account->receipt_id == true)
-                                                            {{$Patient_account->receipt->description}}
-
-                                                        @elseif($Patient_account->payment_id == true)
-                                                            {{$Patient_account->payment->description}}
-                                                        @endif
-
-                                                    </td>
-                                                    <td>{{ $Patient_account->debit}}</td>
-                                                    <td>{{ $Patient_account->credit}}</td>
-                                                    <td>
-                                                        {{-- {{ $Patient_account->debit - $Patient_account->credit}} --}}
-                                                    </td>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $account->date }}</td>
+                                                    <td>{{ $account->patient->name }}</td>
+                                                    <td>{{ $account->description }}</td>
+                                                    <td>{{ $account->debit }}</td>
+                                                    <td>{{ $account->credit }}</td>
+                                                    <td>{{ $account->debit - $account->credit }}</td>
                                                 </tr>
-                                                <br>
                                             @endforeach
-                                            <tr>
-                                                <th colspan="3" scope="row" class="alert alert-success">
-                                                    الاجمالي
-                                                </th>
-                                                <td class="alert alert-primary">{{ number_format( $debit = \App\Models\Boxes\PatientAccount::latest()->take(5)->get()->sum('debit'), 2) }}</td>
-                                                <td class="alert alert-primary">{{ number_format( $credit = \App\Models\Boxes\PatientAccount::latest()->take(5)->get()->sum('credit'), 2) }}</td>
-                                                <td class="alert alert-danger">
-                                                    <span class="text-danger"> {{$debit - $credit}}   {{ $debit-$credit > 0 ? 'مدين' :'دائن'}}</span>
-                                                </td>
-                                            </tr>
                                             </tbody>
                                         </table>
-
                                     </div>
                                 </div>
-
-                                <div class="tab-pane" id="xray">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover text-md-nowrap text-center"
-                                               id="example1">
-                                            <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>اسم الدكتور</th>
-                                                <th>اسم المريض</th>
-                                                <th>اسم الخدمة او العرض</th>
-                                                <th>الوصف</th>
-                                                <th>الصورة</th>
-
-
-
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach(\App\Models\Rays\Ray::latest()->take(5)->get() as $patientRay)
-                                                <tr>
-                                                    <td>{{$loop->iteration}}</td>
-                                                    <td>{{$patientRay->doctor->name}}</td>
-                                                    <td>{{$patientRay->patient->name}}</td>
-                                                    <td>
-                                                        @if(isset($patientRay->invoice->service))
-                                                            {{$patientRay->invoice->service->name}}
-                                                        @elseif(isset($patientRay->invoice->group))
-                                                            {{$patientRay->invoice->group->name}}
-                                                        @endif
-                                                    </td>
-                                                    <td>{{$patientRay->description}}</td>
-
-                                                    <!-- عرض جميع الصور المرتبطة بالشعاع -->
-                                                    <td>
-                                                        @if($patientRay->images->count() > 0 )
-                                                            @foreach($patientRay->images as $image)
-                                                                @if($image->type==0)
-                                                                    <img src="{{ asset('Dashboard/img/x-rays/'.$patientRay->patient->name.'/send/'.$patientRay->id.'/'.$image->filename) }}"
-                                                                         style="width: 150px; border-radius: 10%; height: 80px; margin-right: 10px;">
-                                                                @endif
-                                                            @endforeach
-
-                                                        @else
-                                                            <span>لا توجد صور</span>
-                                                        @endif
-                                                    </td>
-
-
-                                                </tr>
-                                                <br>
-                                                @include('Dashboard.Doctors.DoctorDashboard.Invoices.delete')
-                                            @endforeach
-
-
-                                            </tbody>
-                                        </table>
-
-                                    </div> <!-- محتويات الجدول للأشعة -->
-                                </div>
-
-                                <div class="tab-pane" id="laboratory">
-                                    <div class="tab-pane" id="tab6">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover text-md-nowrap text-center"
-                                                   id="example1">
-                                                <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>اسم الدكتور</th>
-                                                    <th>اسم المريض</th>
-                                                    <th>اسم الخدمة او العرض</th>
-                                                    <th>الوصف</th>
-                                                    <th>الصورة</th>
-
-
-
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach(\App\Models\Laboratories\Laboratory::latest()->take(5)->get() as $patientLaboratory)
-                                                    <tr>
-                                                        <td>{{$loop->iteration}}</td>
-                                                        <td>{{$patientLaboratory->doctor->name}}</td>
-                                                        <td>{{$patientLaboratory->patient->name}}</td>
-                                                        <td>
-                                                            @if(isset($patientLaboratory->invoice->service))
-                                                                {{$patientLaboratory->invoice->service->name}}
-                                                            @elseif(isset($patientLaboratory->invoice->group))
-                                                                {{$patientLaboratory->invoice->group->name}}
-                                                            @endif
-                                                        </td>
-                                                        <td>{{$patientLaboratory->description}}</td>
-
-                                                        <!-- عرض جميع الصور المرتبطة بالشعاع -->
-                                                        <td>
-                                                            @if($patientLaboratory->image)
-
-                                                                <img src="{{ asset('Dashboard/img/Laboratory/'.$patientLaboratory->patient->name.'/'.$patientLaboratory->id.'/'.$image->filename) }}"
-                                                                     style="width: 150px; border-radius: 10%; height: 80px; margin-right: 10px;">
-
-                                                            @else
-                                                                <span>لا توجد صور</span>
-                                                            @endif
-                                                        </td>
-
-
-                                                    </tr>
-                                                    @include('Dashboard.Doctors.DoctorDashboard.Invoices.Laboratory.delete')
-                                                @endforeach
-
-
-                                                </tbody>
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -752,38 +617,39 @@
     <div class="row row-sm row-deck">
         <div class="col-md-12 col-lg-12 col-xl-12">
             <div class="pb-2 card card-dashboard-eight">
-                <h6 class="card-title">Top Medical Advanced Countries</h6>
-                <span class="d-block mg-b-10 text-muted tx-12">Medical advancements and average doctor salary by country</span>
+                <h6 class="card-title">{{ __('dashboard.top_medical_countries') }}</h6>
+                <span class="d-block mg-b-10 text-muted tx-12">{{ __('dashboard.medical_advancements') }}</span>
                 <div class="list-group">
-                    <!-- Add items here for each country -->
+                    <!-- عناصر الدول مع الرواتب -->
                     <div class="list-group-item border-top-0">
                         <i class="flag-icon flag-icon-us flag-icon-squared"></i>
-                        <p>United States</p><span>$230,000</span>
+                        <p>{{ __('dashboard.countries.united_states') }}</p><span>$230,000</span>
                     </div>
                     <div class="list-group-item">
                         <i class="flag-icon flag-icon-de flag-icon-squared"></i>
-                        <p>Germany</p><span>$185,000</span>
+                        <p>{{ __('dashboard.countries.germany') }}</p><span>$185,000</span>
                     </div>
                     <div class="list-group-item">
                         <i class="flag-icon flag-icon-gb flag-icon-squared"></i>
-                        <p>United Kingdom</p><span>$120,000</span>
+                        <p>{{ __('dashboard.countries.united_kingdom') }}</p><span>$120,000</span>
                     </div>
                     <div class="list-group-item">
                         <i class="flag-icon flag-icon-ch flag-icon-squared"></i>
-                        <p>Switzerland</p><span>$200,000</span>
+                        <p>{{ __('dashboard.countries.switzerland') }}</p><span>$200,000</span>
                     </div>
                     <div class="list-group-item">
                         <i class="flag-icon flag-icon-nl flag-icon-squared"></i>
-                        <p>Netherlands</p><span>$135,000</span>
+                        <p>{{ __('dashboard.countries.netherlands') }}</p><span>$135,000</span>
                     </div>
                     <div class="mb-0 list-group-item border-bottom-0">
                         <i class="flag-icon flag-icon-au flag-icon-squared"></i>
-                        <p>Australia</p><span>$150,000</span>
+                        <p>{{ __('dashboard.countries.australia') }}</p><span>$150,000</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- /row -->
     </div>
@@ -905,4 +771,7 @@
         });
 
     </script>
+
+
+
 @endsection

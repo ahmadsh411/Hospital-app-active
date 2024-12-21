@@ -1,0 +1,33 @@
+<?php
+return [
+    'patient_info' => 'معلومات المريض',
+    'invoices' => 'الفواتير',
+    'payments' => 'المدفوعات',
+    'account_statement' => 'كشف حساب',
+    'xray' => 'الأشعة',
+    'laboratory' => 'المختبر',
+    // الترجمة السابقة لعناوين الجداول
+    'patient_name' => 'اسم المريض',
+    'phone' => 'رقم الهاتف',
+    'email' => 'البريد الإلكتروني',
+    'date_of_birth' => 'تاريخ الميلاد',
+    'gender' => 'النوع',
+    'male' => 'ذكر',
+    'female' => 'أنثى',
+    'blood_type' => 'فصيلة الدم',
+    'service_name' => 'اسم الخدمة',
+    'invoice_date' => 'تاريخ الفاتورة',
+    'total_with_tax' => 'الإجمالي مع الضريبة',
+    'invoice_type' => 'نوع الفاتورة',
+    'cash' => 'نقدي',
+    'credit' => 'آجل',
+    'total' => 'الإجمالي',
+    'payment_date' => 'تاريخ الدفع',
+    'amount' => 'المبلغ',
+    'description' => 'الوصف',
+    'entry_date' => 'تاريخ الإدخال',
+    'debit' => 'مدين',
+    'credit' => 'دائن',
+    'final_balance' => 'الرصيد النهائي',
+];
+

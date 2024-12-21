@@ -1,0 +1,32 @@
+<?php
+
+
+return [
+    'hospital_management_program' => 'Hospital Management ',
+    'dashboard' => 'Dashboard',
+    'hospital_elements' => 'Hospital Elements',
+    'sections' => 'Sections',
+    'all_sections' => 'All Sections',
+    'doctors' => 'Doctors',
+    'all_doctors' => 'All Doctors',
+    'services' => 'Services',
+    'single_service' => 'Single Service',
+    'service_offers' => 'Service Offers',
+    'insurance_companies' => 'Insurance Companies',
+    'all_insurance_companies' => 'All Insurance Companies',
+    'ambulance' => 'Ambulance',
+    'manage_ambulance' => 'Manage Ambulance',
+    'elements' => 'Elements',
+    'patients' => 'Patients',
+    'manage_patients' => 'Manage Patients',
+    'invoices' => 'Invoices',
+    'manage_invoices' => 'Manage Invoices',
+    'accounts' => 'Accounts',
+    'receipt_vouchers' => 'Receipt Vouchers',
+    'payment_vouchers' => 'Payment Vouchers',
+    'staff' => 'Staff',
+    'all_staff' => 'All Staff',
+    'messages' => 'Messages',
+    'all_messages' => 'All Messages',
+    'recent_messages' => 'Recent Messages',
+];

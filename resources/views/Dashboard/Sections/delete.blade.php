@@ -3,26 +3,26 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">DeleteThe Section:{{$section->name}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    {{ __('dashboard.delete_section') }}: {{$section->name}}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('dashboard.close') }}">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{route('section.delete',['id'=>$section->id])}}" method="POST" autocomplete="off">
+            <form action="{{ route('section.delete', ['id' => $section->id]) }}" method="POST" autocomplete="off">
                 <div class="modal-body">
                     @csrf
                     @method('DELETE')
-                   <div>
-                       <h3 style="color: red">Are You Shore To Delete The Section !</h3>
-                   </div>
+                    <div>
+                        <h3 style="color: red">{{ __('dashboard.confirm_delete_section') }}</h3>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('dashboard.close') }}</button>
+                    <button type="submit" class="btn btn-danger">{{ __('dashboard.delete') }}</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-

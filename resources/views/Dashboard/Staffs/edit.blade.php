@@ -15,8 +15,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Staff</h4><span
-                        class="text-muted mt-1 tx-13 mr-2 mb-0">/ All</span>
+                <h4 class="content-title mb-0 my-auto">{{ __('messages.Staff') }}</h4>
+                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('messages.All') }}</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
@@ -27,14 +27,14 @@
                 <button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
             </div>
             <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
+                <button type="button" class="btn btn-warning btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
             </div>
             <div class="mb-3 mb-xl-0">
                 <div class="btn-group dropdown">
                     <button type="button" class="btn btn-primary">14 Aug 2019</button>
                     <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
                             id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="sr-only">Toggle Dropdown</span>
+                        <span class="sr-only">{{ __('messages.Toggle Dropdown') }}</span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate"
                          data-x-placement="bottom-end">
@@ -49,9 +49,10 @@
     </div>
     <!-- breadcrumb -->
 @endsection
+
 @section('content')
 
-    <form action="{{ route('staff-hospital.update', ['staff_hospital'=>$staff->id]) }}" method="POST">
+    <form action="{{ route('staff-hospital.update', ['staff_hospital' => $staff->id]) }}" method="POST">
         @csrf
         @method('PUT') <!-- نستخدم PUT للتعديل -->
 
@@ -59,7 +60,7 @@
             <!-- Name Field -->
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="name">Name</label>
+                    <label for="name">{{ __('messages.Name') }}</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{ $staff->name }}" required>
                 </div>
             </div>
@@ -67,9 +68,8 @@
             <!-- Email Field -->
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{ $staff->email }}"
-                           required>
+                    <label for="email">{{ __('messages.Email') }}</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ $staff->email }}" required>
                 </div>
             </div>
         </div>
@@ -78,18 +78,16 @@
             <!-- Password Field -->
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="password">Password (Leave blank if not changing)</label>
-                    <input type="password" class="form-control" id="password" name="password"
-                           placeholder="Leave blank if not changing">
+                    <label for="password">{{ __('messages.Password (Leave blank if not changing)') }}</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="{{ __('messages.Leave blank if not changing') }}">
                 </div>
             </div>
 
             <!-- Address Field -->
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" name="address" value="{{ $staff->address }}"
-                           required>
+                    <label for="address">{{ __('messages.Address') }}</label>
+                    <input type="text" class="form-control" id="address" name="address" value="{{ $staff->address }}" required>
                 </div>
             </div>
         </div>
@@ -98,16 +96,15 @@
             <!-- Phone Field -->
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="text" class="form-control" id="phone" name="phone" value="{{ $staff->phone }}"
-                           required>
+                    <label for="phone">{{ __('messages.Phone') }}</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="{{ $staff->phone }}" required>
                 </div>
             </div>
 
             <!-- Gender Field -->
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="gender_id">Gender</label>
+                    <label for="gender_id">{{ __('messages.Gender') }}</label>
                     <select class="form-control select2" id="gender_id" name="gender_id" required>
                         @foreach($genders as $gender)
                             <option value="{{ $gender->id }}" {{ $staff->gender_id == $gender->id ? 'selected' : '' }}>
@@ -123,7 +120,7 @@
             <!-- Section Field -->
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="section_id">Section</label>
+                    <label for="section_id">{{ __('messages.Section') }}</label>
                     <select class="form-control select2" id="section_id" name="section_id" required>
                         @foreach($sections as $section)
                             <option value="{{ $section->id }}" {{ $staff->section_id == $section->id ? 'selected' : '' }}>
@@ -139,9 +136,8 @@
             <!-- Appointments Field -->
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="appointment_id">Appointments</label>
-                    <select class="form-control select2" id="appointment_id" name="appointment_ids[]"
-                            multiple="multiple" required>
+                    <label for="appointment_id">{{ __('messages.Appointments') }}</label>
+                    <select class="form-control select2" id="appointment_id" name="appointment_ids[]" multiple="multiple" required>
                         @foreach($appointments as $appointment)
                             <option value="{{ $appointment->id }}" {{ in_array($appointment->id, $staff->appointments->pluck('id')->toArray()) ? 'selected' : '' }}>
                                 {{ $appointment->name }}
@@ -154,12 +150,13 @@
 
         <!-- Submit Button -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Update Staff Member</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('messages.Close') }}</button>
+            <button type="submit" class="btn btn-primary">{{ __('messages.Update Staff Member') }}</button>
         </div>
     </form>
 
 @endsection
+
 
 
 

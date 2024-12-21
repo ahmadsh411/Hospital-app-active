@@ -92,87 +92,82 @@
     <div class="row">
         <div class="receipt-container" id="printable-receipt">
             <div class="receipt-header">
-                <div class="receipt-title">فاتورة</div>
-                <h2>مشفى</h2>
-                <p>123 الشارع الرئيسي، المدينة، الدولة</p>
+                <div class="receipt-title">{{ __('messages.Invoice') }}</div>
+                <h2>{{ __('messages.Hospital') }}</h2>
+                <p>{{ __('messages.Address') }}</p>
             </div>
-
             <div class="receipt-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <label>اسم المستفيد:</label>
+                        <label>{{ __('messages.Beneficiary Name') }}:</label>
                         <span class="receipt-info">{{ $singleInvoice->patient->name }}</span>
                     </div>
                     <div class="col-md-4 text-right">
-                        <label>التاريخ:</label>
+                        <label>{{ __('messages.Date') }}:</label>
                         <span class="receipt-info">{{ $singleInvoice->invoice_date }}</span>
                     </div>
                     @if ($singleInvoice->group)
                         <div class="col-md-4">
-                            <label>مجموعه الخدمة:</label>
+                            <label>{{ __('messages.Service Group') }}:</label>
                             <span class="receipt-info">{{ $singleInvoice->group->name }}</span>
                         </div>
                         <div class="col-md-4">
-                            <label>اسم الخدمة:</label>
-                            @foreach ($singleInvoice->group->service_group as $service )
+                            <label>{{ __('messages.Service Name') }}:</label>
+                            @foreach ($singleInvoice->group->service_group as $service)
                                 <span class="receipt-info">{{ $service->name }}</span>
                             @endforeach
                         </div>
                     @else
                         <div class="col-md-4">
-                            <label>اسم الخدمة:</label>
+                            <label>{{ __('messages.Service Name') }}:</label>
                             <span class="receipt-info">{{ $singleInvoice->service->name }}</span>
                         </div>
                     @endif
                 </div>
-
                 <div class="row">
                     <div class="col-md-4">
-                        <label>اسم الدكتور:</label>
+                        <label>{{ __('messages.Doctor Name') }}:</label>
                         <span class="receipt-info">{{ $singleInvoice->doctor->name }}</span>
                     </div>
                     <div class="col-md-4">
-                        <label>القسم:</label>
+                        <label>{{ __('messages.Section') }}:</label>
                         <span class="receipt-info">{{ $singleInvoice->section->name }}</span>
                     </div>
-
                 </div>
-
                 <div class="row mt-4">
                     <div class="col-md-4">
-                        <label>قيمة الخصم:</label>
-                        <span class="receipt-info">{{ number_format($singleInvoice->discount_value, 2) }} ر.س</span>
+                        <label>{{ __('messages.Discount Value') }}:</label>
+                        <span class="receipt-info">{{ number_format($singleInvoice->discount_value, 2) }} {{ __('messages.Currency') }}</span>
                     </div>
                     <div class="col-md-4">
-                        <label>نسبة الضريبة:</label>
+                        <label>{{ __('messages.Tax Rate') }}:</label>
                         <span class="receipt-info">{{ $singleInvoice->tax_rate }}%</span>
                     </div>
                     <div class="col-md-4 text-right">
-                        <label>الإجمالي مع الضريبة:</label>
-                        <span class="receipt-info">{{ number_format($singleInvoice->tot_with_tax, 2) }} ر.س</span>
+                        <label>{{ __('messages.Total with Tax') }}:</label>
+                        <span class="receipt-info">{{ number_format($singleInvoice->tot_with_tax, 2) }} {{ __('messages.Currency') }}</span>
                     </div>
                 </div>
             </div>
-
             <div class="receipt-footer">
                 <div class="row">
                     <div class="col-md-6">
-                        <label>اسم الموظف:</label>
+                        <label>{{ __('messages.Employee Name') }}:</label>
                         <span class="receipt-info"></span>
                     </div>
                     <div class="col-md-6 text-right">
-                        <label>التوقيع:</label>
+                        <label>{{ __('messages.Signature') }}:</label>
                         <div class="signature-line"></div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="text-center mt-4">
-            <button onclick="printReceipt()" class="btn btn-primary">طباعة الفاتورة</button>
+            <button onclick="printReceipt()" class="btn btn-primary">{{ __('messages.Print Invoice') }}</button>
         </div>
     </div>
 @endsection
+
 
 @section('js')
     <script>

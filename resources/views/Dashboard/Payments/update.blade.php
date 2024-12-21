@@ -19,7 +19,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Update</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Payment</span>
+                <h4 class="content-title mb-0 my-auto">{{trans('messages.Update')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{trans('messages.Payment')}}</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
@@ -55,7 +55,7 @@
 @endsection
 @section('content')
     <!-- تعديل الرابط ليقوم بالتحديث -->
-    <form action="{{ route('paiment-box.update',['paiment_box'=> $payment->id]) }}" method="POST">
+    <form action="{{ route('paiment-box.update', ['paiment_box' => $payment->id]) }}" method="POST">
         @csrf
         @method('PUT') <!-- نحدد هنا طريقة PUT -->
 
@@ -63,14 +63,18 @@
             <!-- حقل التاريخ -->
             <div class="row mb-4">
                 <div class="col-md-6">
-                    <label for="date" class="form-label" style="font-weight: bold;">التاريخ</label>
+                    <label for="date" class="form-label" style="font-weight: bold;">
+                        {{ __('messages.Date') }}
+                    </label>
                     <input type="date" class="form-control form-control-lg border-dark" id="date" name="date"
                            value="{{ $payment->date }}" required readonly>
                 </div>
 
                 <!-- اختيار المريض -->
                 <div class="col-md-6">
-                    <label for="patient_id" class="form-label" style="font-weight: bold;">اسم المستفيد</label>
+                    <label for="patient_id" class="form-label" style="font-weight: bold;">
+                        {{ __('messages.Beneficiary Name') }}
+                    </label>
                     <select class="form-select form-select-lg border-dark" id="patient_id" name="patient_id" required>
                         <option id="searchPatient" class="form-control mb-2"></option>
                         @foreach($patients as $patient)
@@ -85,7 +89,9 @@
             <!-- حقل الديون -->
             <div class="row mb-4">
                 <div class="col-12">
-                    <label for="debit" class="form-label" style="font-weight: bold;">المبلغ المالي</label>
+                    <label for="debit" class="form-label" style="font-weight: bold;">
+                        {{ __('messages.Amount') }}
+                    </label>
                     <input type="number" step="0.01" class="form-control form-control-lg border-dark" id="debit"
                            name="debit" value="{{ $payment->debit }}" required>
                 </div>
@@ -94,7 +100,9 @@
             <!-- وصف السند -->
             <div class="row mb-4">
                 <div class="col-12">
-                    <label for="description" class="form-label" style="font-weight: bold;">الوصف/التفاصيل</label>
+                    <label for="description" class="form-label" style="font-weight: bold;">
+                        {{ __('messages.Description/Details') }}
+                    </label>
                     <textarea class="form-control form-control-lg border-dark" id="description" name="description"
                               rows="3">{{ $payment->description }}</textarea>
                 </div>
@@ -103,20 +111,21 @@
 
         <!-- Footer يحتوي على زر الحفظ -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                {{ __('messages.Close') }}
+            </button>
             <button type="submit" class="btn btn-primary"
-                    style="background-color: #0d6efd; border-radius: 50px; padding: 10px 20px;">تحديث السند
+                    style="background-color: #0d6efd; border-radius: 50px; padding: 10px 20px;">
+                {{ __('messages.Update Receipt') }}
             </button>
         </div>
     </form>
-
-
 
     <script>
         $(document).ready(function () {
             // تفعيل Select2 على قائمة اختيار المرضى
             $('#patient_id').select2({
-                placeholder: 'ابحث عن اسم المريض',
+                placeholder: '{{ __('messages.Search for patient name') }}',
                 allowClear: true,
                 width: '100%' // لضمان التوافق الكامل مع عرض العنصر
             });
@@ -138,6 +147,7 @@
         });
     </script>
 @endsection
+
 @section('js')
     <!-- Internal Data tables -->
     <script src="{{URL::asset('Dashboard/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>

@@ -14,10 +14,11 @@
 <body class="main-body app sidebar-mini">
 <!-- Loader -->
 <div id="global-loader">
-    <img src="{{URL::asset('Dashboard/img/loader.svg')}}" class="loader-img" alt="Loader">
+    <img src="{{URL::asset('Dashboard/img/Loading progress.gif')}}" class="loader-img" alt="Loader" type="image/x-icon" >
 </div>
 <!-- /Loader -->
 @include('Dashboard.layouts.Staff.main-sidebar_staff')
+@livewireStyles
 <!-- main-content -->
 <div class="main-content app-content">
     @include('Dashboard.layouts.main-header')
@@ -29,5 +30,7 @@
 @include('Dashboard.layouts.models')
 @include('Dashboard.layouts.footer')
 @include('Dashboard.layouts.footer-scripts')
+        <script src="{{ asset('js/app.js') }}"></script>
+        @livewireScripts
 </body>
 </html>

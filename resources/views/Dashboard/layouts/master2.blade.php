@@ -14,7 +14,7 @@
 <body class="main-body bg-primary-transparent">
 <!-- Loader -->
 <div id="global-loader">
-    <img src="{{URL::asset('Dashboard/img/loader.svg')}}" class="loader-img" alt="Loader">
+    <img src="{{URL::asset('Dashboard/img/loader1.svg')}}" class="loader-img" alt="Loader"style="width: 12.5%;height: 12.5%">
 </div>
 <!-- /Loader -->
 @yield('content')

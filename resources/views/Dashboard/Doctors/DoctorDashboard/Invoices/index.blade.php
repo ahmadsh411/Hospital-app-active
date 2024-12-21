@@ -14,7 +14,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Invoices</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Doctor Invoices</span>
+                <h4 class="content-title mb-0 my-auto">{{__('messages.invoices')}}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{__('messages.doctor_invoices')}}</span>
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0">Invoices Table</h4>
+                        <h4 class="card-title mg-b-0">{{ __('messages.invoices_table') }}</h4>
                         <i class="mdi mdi-dots-horizontal text-gray"></i>
                     </div>
                 </div>
@@ -43,20 +43,20 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Patient Name</th>
-                                <th>Invoice Type</th>
-                                <th>Service/Group</th>
-                                <th>Section</th>
-                                <th>Invoice Date</th>
-                                <th>Price</th>
-                                <th>Discount</th>
-                                <th>Tax Rate</th>
-                                <th>Tax Value</th>
-                                <th>Total with Tax</th>
-                                <th>Status:</th>
-                                <th>Invoice Status:</th>
-                                <th>Reviews Date</th>
-                                <th>Operations</th>
+                                <th>{{ __('messages.patient_name') }}</th>
+                                <th>{{ __('messages.invoice_type') }}</th>
+                                <th>{{ __('messages.service_or_group') }}</th>
+                                <th>{{ __('messages.section') }}</th>
+                                <th>{{ __('messages.invoice_date') }}</th>
+                                <th>{{ __('messages.price') }}</th>
+                                <th>{{ __('messages.discount') }}</th>
+                                <th>{{ __('messages.tax_rate') }}</th>
+                                <th>{{ __('messages.tax_value') }}</th>
+                                <th>{{ __('messages.total_with_tax') }}</th>
+                                <th>{{ __('messages.status') }}</th>
+                                <th>{{ __('messages.invoice_status') }}</th>
+                                <th>{{ __('messages.reviews_date') }}</th>
+                                <th>{{ __('messages.operations') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -64,16 +64,18 @@
                                 <tr>
                                     <td>{{$i++}}</td>
                                     <td>
-                                        <a href="{{route('patient.details',['id'=>$invoice->patient->id])}}">{{$invoice->patient->name}}</a>
+                                        <a href="{{route('patient.details',['id'=>$invoice->patient->id])}}">
+                                            {{$invoice->patient->name}}
+                                        </a>
                                     </td>
                                     <td>
                                         @if($invoice->invoice_type == 1)
-                                            <span class="badge badge-success">فاتورة مجمعه</span>
+                                            <span class="badge badge-success">{{ __('messages.group_invoice') }}</span>
                                         @else
-                                            <span class="badge badge-warning">فاتورة مفردة</span>
+                                            <span class="badge badge-warning">{{ __('messages.single_invoice') }}</span>
                                         @endif
                                     </td>
-                                    <td>{{ $invoice->service ? $invoice->service->name : ($invoice->group ? $invoice->group->name : 'N/A') }}</td>
+                                    <td>{{ $invoice->service ? $invoice->service->name : ($invoice->group ? $invoice->group->name : __('messages.not_available')) }}</td>
                                     <td>{{$invoice->section->name}}</td>
                                     <td>{{$invoice->invoice_date}}</td>
                                     <td>{{number_format($invoice->price, 2)}}</td>
@@ -83,18 +85,18 @@
                                     <td>{{number_format($invoice->tot_with_tax, 2)}}</td>
                                     <td>
                                         @if($invoice->type == 1)
-                                            <span class="badge badge-success">مدفوعة </span>
+                                            <span class="badge badge-success">{{ __('messages.paid') }}</span>
                                         @else
-                                            <span class="badge badge-danger">غير مدفوعة</span>
+                                            <span class="badge badge-danger">{{ __('messages.unpaid') }}</span>
                                         @endif
                                     </td>
                                     <td>
                                         @if($invoice->invoice_status == 1)
-                                            <span class="badge badge-info">تم الاجراء</span>
+                                            <span class="badge badge-info">{{ __('messages.completed') }}</span>
                                         @elseif ($invoice->invoice_status == 0)
-                                            <span class="badge badge-danger">تحت الاجراء</span>
+                                            <span class="badge badge-danger">{{ __('messages.in_progress') }}</span>
                                         @else
-                                            <span class="badge badge-warning">تحت المراجعة</span>
+                                            <span class="badge badge-warning">{{ __('messages.under_review') }}</span>
                                         @endif
                                     </td>
                                     <td>
@@ -102,59 +104,41 @@
                                             @foreach($invoice->Medical_Diagnosises as $medical)
                                                 @if($medical->invoice_id==$invoice->id)
                                                     <p>{{$medical->review_date}}</p>
-
                                                 @endif
                                             @endforeach
                                         @else
-                                            <span><strong>NO Reviews</strong></span>
+                                            <span><strong>{{ __('messages.no_reviews') }}</strong></span>
                                         @endif
                                     </td>
-
                                     <td>
                                         <div class="dropdown">
                                             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
                                                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false">
-                                                العمليات
+                                                {{ __('messages.operations') }}
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <!-- زر إضافة تشخيص -->
                                                 <button class="dropdown-item" type="button" data-toggle="modal"
                                                         data-target="#addDiagnosisModal{{$invoice->patient->id}}">
-                                                    <i class="fas fa-notes-medical text-info"></i> إضافة تشخيص
+                                                    <i class="fas fa-notes-medical text-info"></i> {{ __('messages.add_diagnosis') }}
                                                 </button>
-
-                                                <!-- زر إضافة مراجعة -->
                                                 <button class="dropdown-item" type="button" data-toggle="modal"
                                                         data-target="#addReview{{$invoice->id}}">
-                                                    <i class="fas fa-calendar-check text-primary"></i> إضافة مراجعة
+                                                    <i class="fas fa-calendar-check text-primary"></i> {{ __('messages.add_review') }}
                                                 </button>
 
-                                                <!-- زر طباعة الفاتورة -->
-                                                <button class="dropdown-item" type="button" onclick="show()">
-                                                    <i class="fas fa-print text-success"></i> طباعة الفاتورة
-                                                </button>
-
-                                                <!-- زر تحويل للمخبر -->
                                                 <button class="dropdown-item" type="button" data-toggle="modal"
                                                         data-target="#addlaboratoryModal{{ $invoice->id }}">
-                                                    <i class="fas fa-microscope"></i> تحويل للمخبر
+                                                    <i class="fas fa-microscope"></i> {{ __('messages.refer_to_lab') }}
                                                 </button>
-
-                                                <!-- زر تحويل للأشعة -->
                                                 <button class="dropdown-item" type="button" data-toggle="modal"
                                                         data-target="#addRayModal{{$invoice->id}}" onclick="x_ray()">
-                                                    <i class="fas fa-x-ray"></i> تحويل للأشعة
+                                                    <i class="fas fa-x-ray"></i> {{ __('messages.refer_to_xray') }}
                                                 </button>
-
                                             </div>
                                         </div>
-
-
-                                        <!-- هنا يمكن إضافة زر لعرض أو تعديل أو حذف الفاتورة -->
                                     </td>
                                 </tr>
-
                                 @include('Dashboard.Doctors.DoctorDashboard.Invoices.NotesMedical')
                                 @include('Dashboard.Doctors.DoctorDashboard.Invoices.addReview')
                                 @include('Dashboard.Doctors.DoctorDashboard.Invoices.add_X_rays')
@@ -167,6 +151,7 @@
             </div>
         </div>
     </div>
+
 
 
 @endsection

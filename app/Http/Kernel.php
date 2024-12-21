@@ -71,5 +71,9 @@ class Kernel extends HttpKernel
          'localeViewPath'          => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
          'AuthMiddleware'=>\App\Http\Middleware\AuthMiddleware::class,
         'multi_auth' => \App\Http\Middleware\MultiAuthMiddleware::class,
+        'x_ray_edit'=>\App\Http\Middleware\x_RayMiddleware_edit::class,
+        'lab_edit'=>\App\Http\Middleware\LaboratoryMiddleware_edit::class,
+        'lab'=>\App\Http\Middleware\LaboratoryAndStaffMiddleware::class,
+        'x_ray'=>\App\Http\Middleware\StaffAndLaboratoryMiddleware::class,
     ];
 }

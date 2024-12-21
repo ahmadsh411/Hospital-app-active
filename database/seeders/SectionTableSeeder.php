@@ -18,7 +18,15 @@ class SectionTableSeeder extends Seeder
     {
 
         DB::table('sections')->delete();
-        Section::factory(6)->create();
+//        Section::factory(6)->create();
+        $names=['قسم العظام','المخبر','قسم الاشعة','قسم الاطفال','قسم المخ والاعصاب','قسم الجراحة'];
+        foreach ($names as $name) {
+            Section::create([
+                'name' => $name,
+                'description'=>"default",
+            ]);
+        }
+
     }
 
 }

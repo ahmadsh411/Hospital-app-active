@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -163,7 +163,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
 
-
         /*
          * Package Service Providers...
          */
@@ -173,7 +172,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
@@ -183,6 +182,7 @@ return [
         App\Providers\InsuranceProvider::class,
         App\Providers\AmbulanceProvider::class,
         App\Providers\PatientProvider::class,
+
 
         App\Providers\InvoiceProvider::class,
         App\Providers\StaffServiceProvider::class,

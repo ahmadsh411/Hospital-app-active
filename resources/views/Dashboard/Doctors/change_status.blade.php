@@ -5,29 +5,28 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    {{ trans('doctors.Status_change') }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    {{ trans('doctors.status_change') }}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="{{ trans('common.close') }}">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('doctor.changestatus',['id'=>$doctor->id]) }}" method="POST" autocomplete="off">
+            <form action="{{ route('doctor.changestatus', ['id' => $doctor->id]) }}" method="POST" autocomplete="off">
                 {{ csrf_field() }}
                 <div class="modal-body">
-
                     <div class="form-group">
-                        <label for="status">{{trans('doctors.Status')}}</label>
+                        <label for="status">{{ trans('doctors.status') }}</label>
                         <select class="form-control" id="status" name="status" required>
-                            <option value="" selected disabled>--{{trans('doctors.Choose')}}--</option>
-                            <option value="1">{{trans('doctors.Enabled')}}</option>
-                            <option value="0">{{trans('doctors.Not_enabled')}}</option>
+                            <option value="" selected disabled>--{{ trans('doctors.changestatus') }}--</option>
+                            <option value="1">{{ trans('doctors.enabled') }}</option>
+                            <option value="0">{{ trans('doctors.not_enabled') }}</option>
                         </select>
                     </div>
-
                     <input type="hidden" name="id" value="{{ $doctor->id }}">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('Dashboard/sections_trans.Close')}}</button>
-                    <button type="submit" class="btn btn-primary">{{trans('Dashboard/sections_trans.submit')}}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('common.close') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ trans('common.submit') }}</button>
                 </div>
             </form>
         </div>

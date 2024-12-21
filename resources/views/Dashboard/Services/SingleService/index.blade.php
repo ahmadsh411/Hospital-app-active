@@ -1,41 +1,47 @@
 @extends('Dashboard.layouts.Admin.master')
 @section('css')
+    <!-- CSS Links -->
     <link href="{{URL::asset('Dashboard/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet"/>
     <link href="{{URL::asset('Dashboard/plugins/datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('Dashboard/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet"/>
     <link href="{{URL::asset('Dashboard/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('Dashboard/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('Dashboard/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
-
     <link href="{{URL::asset('Dashboard/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
-
 @endsection
+
 @section('page-header')
 
-    <!-- breadcrumb -->
+    <!-- Breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Pages</h4><span
-                        class="text-muted mt-1 tx-13 mr-2 mb-0">/ Empty</span>
+                <h4 class="content-title mb-0 my-auto">@lang('dashboard.service')</h4>
+                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ @lang('doctors.ALL')</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
+                <button type="button" class="btn btn-info btn-icon ml-2">
+                    <i class="mdi mdi-filter-variant"></i>
+                </button>
             </div>
             <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
+                <button type="button" class="btn btn-danger btn-icon ml-2">
+                    <i class="mdi mdi-star"></i>
+                </button>
             </div>
             <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
+                <button type="button" class="btn btn-warning btn-icon ml-2">
+                    <i class="mdi mdi-refresh"></i>
+                </button>
             </div>
             <div class="mb-3 mb-xl-0">
                 <div class="btn-group dropdown">
                     <button type="button" class="btn btn-primary">14 Aug 2019</button>
                     <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
                             id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="sr-only">Toggle Dropdown</span>
+                        <span class="sr-only">@lang('dashboard.toggle_dropdown')</span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate"
                          data-x-placement="bottom-end">
@@ -48,16 +54,17 @@
             </div>
         </div>
     </div>
-    <!-- breadcrumb -->
+    <!-- Breadcrumb -->
 
 @endsection
+
 @section('content')
     @php
         $i=1;
     @endphp
     @include('Dashboard.messages_allert')
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">
-        Create Section
+        @lang('dashboard.create_service')
     </button>
     <br>
     <br>
@@ -65,16 +72,15 @@
     <br>
 
     <div class="row row-sm">
-
-        <!--div-->
+        <!-- Table Section -->
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0">Bordered Table</h4>
+                        <h4 class="card-title mg-b-0">@lang('dashboard.bordered_table')</h4>
                         <i class="mdi mdi-dots-horizontal text-gray"></i>
                     </div>
-                    <p class="tx-12 tx-gray-500 mb-2">Example of Valex Bordered Table.. <a href="">Learn more</a></p>
+                    <p class="tx-12 tx-gray-500 mb-2">@lang('dashboard.table_description') <a href="">@lang('dashboard.learn_more')</a></p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -82,12 +88,11 @@
                             <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">Service Name</th>
-                                <th class="border-bottom-0">Description</th>
-                                <th class="border-bottom-0">Activation</th>
-                                <th class="border-bottom-0">Price</th>
-                                <th class="border-bottom-0">Operations</th>
-
+                                <th class="border-bottom-0">@lang('dashboard.service_name')</th>
+                                <th class="border-bottom-0">@lang('dashboard.description')</th>
+                                <th class="border-bottom-0">@lang('dashboard.activation')</th>
+                                <th class="border-bottom-0">@lang('dashboard.price')</th>
+                                <th class="border-bottom-0">@lang('dashboard.operations')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -99,20 +104,24 @@
                                     <td>
                                         <div class="row">
                                             <div class="dot-label bg-{{$single->status == 1 ? 'success':'danger'}} ml-1 "></div>
-                                            <div class="col-md-9">   {{$single->status == 1 ? "Enable":"Not Enable"}}</div>
+                                            <div class="col-md-9">
+                                                @if($single->status == 1)
+                                                    @lang('dashboard.enabled')
+                                                @else
+                                                    @lang('dashboard.not_enabled')
+                                                @endif
+                                            </div>
+
                                         </div>
                                     </td>
                                     <td>{{$single->price}}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#update{{$single->id}}">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#update{{$single->id}}">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                data-target="#delete{{$single->id}}">
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$single->id}}">
                                             <i class="fas fa-trash"></i>
                                         </button>
-
                                     </td>
                                 </tr>
                                 @include('Dashboard.Services.SingleService.update')
@@ -124,20 +133,10 @@
                 </div>
             </div>
         </div>
-        <!--/div-->
-
-        <!--div-->
-
-        <!-- /row -->
     </div>
     @include('Dashboard.Services.SingleService.add')
-
-    <!-- row closed -->
-    </div>
-    <!-- Container closed -->
-    </div>
-    <!-- main-content closed -->
 @endsection
+
 @section('js')
     <!-- Internal Data tables -->
     <script src="{{URL::asset('Dashboard/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
@@ -156,11 +155,7 @@
     <script src="{{URL::asset('Dashboard/plugins/datatable/js/buttons.colVis.min.js')}}"></script>
     <script src="{{URL::asset('Dashboard/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
     <script src="{{URL::asset('Dashboard/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
-    <!--Internal  Datatable js -->
-    <script src="{{URL::asset('Dashboard/js/table-data.js')}}"></script>
-    <!--Internal  Notify js -->
+    <!-- Internal Notify js -->
     <script src="{{URL::asset('Dashboard/plugins/notify/js/notifIt.js')}}"></script>
     <script src="{{URL::asset('Dashboard/plugins/notify/js/notifit-custom.js')}}"></script>
-
 @endsection
-

@@ -3,75 +3,69 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content p-4" style="border: 2px solid #000; background-color: #f9f9f9; border-radius: 15px;">
             <div class="modal-header">
-                <h5 class="modal-title" id="createReceiptModalLabel" style="font-weight: bold;">إصدار سند مالي</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="createReceiptModalLabel" style="font-weight: bold;">{{ trans('messages.create_receipt') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="{{ trans('messages.close') }}">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form action="{{ route('receipt-box.store') }}" method="POST">
                 @csrf
                 <div class="modal-body">
-                    <!-- حقل التاريخ -->
+                    <!-- Date Field -->
                     <div class="row mb-4">
                         <div class="col-md-4">
-                            <label for="date" class="form-label" style="font-weight: bold;">التاريخ</label>
+                            <label for="date" class="form-label" style="font-weight: bold;">{{ trans('messages.date') }}</label>
                             <input type="date" class="form-control form-control-lg border-dark" id="date" name="date" required>
                         </div>
-
-                        <!-- اختيار المريض -->
+                        <!-- Select Patient -->
                         <div class="col-md-4">
-                            <label for="patient_id" class="form-label" style="font-weight: bold;">اسم المستفيد</label>
+                            <label for="patient_id" class="form-label" style="font-weight: bold;">{{ trans('messages.beneficiary_name') }}</label>
                             <select class="form-select form-select-lg border-dark" id="patient_id" name="patient_id" required>
                                 <option id="searchPatient" class="form-control mb-2"></option>
                                 @foreach($patients as $patient)
-                                    <option value="{{ $patient->id }}" data-bill="{{ $patient->patientAccount->sum('debit')- $patient->patientAccount->sum('credit') }}">{{ $patient->name }}</option>
+                                    <option value="{{ $patient->id }}" data-bill="{{ $patient->patientAccount->sum('debit') - $patient->patientAccount->sum('credit') }}">{{ $patient->name }}</option>
                                 @endforeach
                             </select>
                         </div>
-
-                        <!-- حقل لعرض الفاتورة الخاصة بالمريض -->
+                        <!-- Invoice Field -->
                         <div class="col-md-4">
-                            <label for="patient_bill" class="form-label" style="font-weight: bold;">الفاتورة</label>
+                            <label for="patient_bill" class="form-label" style="font-weight: bold;">{{ trans('messages.invoice') }}</label>
                             <input type="text" class="form-control form-control-lg border-dark" id="patient_bill" name="patient_bill" readonly>
                         </div>
-
                         <script>
-                            // تحديث حقل الفاتورة عند اختيار المريض
+                            // Update the invoice field when a patient is selected
                             document.getElementById('patient_id').addEventListener('change', function() {
                                 var selectedOption = this.options[this.selectedIndex];
                                 var billAmount = selectedOption.getAttribute('data-bill') || 0;
                                 document.getElementById('patient_bill').value = billAmount;
                             });
                         </script>
-
                     </div>
-
-                    <!-- حقل الديون -->
+                    <!-- Amount Field -->
                     <div class="row mb-4">
                         <div class="col-12">
-                            <label for="debit" class="form-label" style="font-weight: bold;">المبلغ المالي</label>
+                            <label for="debit" class="form-label" style="font-weight: bold;">{{ trans('messages.amount') }}</label>
                             <input type="number" step="0.01" class="form-control form-control-lg border-dark" id="debit" name="debit" placeholder="0.00" required>
                         </div>
                     </div>
-
-                    <!-- وصف السند -->
+                    <!-- Description -->
                     <div class="row mb-4">
                         <div class="col-12">
-                            <label for="description" class="form-label" style="font-weight: bold;">الوصف/التفاصيل</label>
-                            <textarea class="form-control form-control-lg border-dark" id="description" name="description" rows="3" placeholder="أدخل تفاصيل السند هنا"></textarea>
+                            <label for="description" class="form-label" style="font-weight: bold;">{{ trans('messages.description') }}</label>
+                            <textarea class="form-control form-control-lg border-dark" id="description" name="description" rows="3" placeholder="{{ trans('messages.enter_details') }}"></textarea>
                         </div>
                     </div>
                 </div>
-
-                <!-- Footer يحتوي على زر الحفظ -->
+                <!-- Footer with Save Button -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" style="background-color: #0d6efd; border-radius: 50px; padding: 10px 20px;">حفظ السند</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('messages.close') }}</button>
+                    <button type="submit" class="btn btn-primary" style="background-color: #0d6efd; border-radius: 50px; padding: 10px 20px;">{{ trans('messages.save_receipt') }}</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 
 <!-- تفعيل مكتبة Select2 على قائمة المرضى -->
 <script>

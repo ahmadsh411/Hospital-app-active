@@ -7,7 +7,7 @@
 						<div class="action-header clearfix">
 							<div class="float-left hidden-xs d-flex ml-2">
 								<div class="img_cont mr-3">
-									<img src="{{URL::asset('Dashboard/img/faces/6.jpg')}}" class="rounded-circle user_img" alt="img">
+                                    <link rel="icon" href="{{URL::asset('Website/images/logo-6.png')}}" type="image/x-icon"/>
 								</div>
 								<div class="align-items-center mt-2">
 									<h4 class="text-white mb-0 font-weight-semibold">Daneil Scott</h4>

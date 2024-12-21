@@ -65,14 +65,14 @@
             <!-- حقل التاريخ -->
             <div class="row mb-4">
                 <div class="col-md-6">
-                    <label for="date" class="form-label" style="font-weight: bold;">التاريخ</label>
+                    <label for="date" class="form-label" style="font-weight: bold;">{{ __('messages.Date') }}</label>
                     <input type="date" class="form-control form-control-lg border-dark" id="date" name="date"
                            value="{{ $receipt->date }}" required readonly>
                 </div>
 
                 <!-- اختيار المريض -->
                 <div class="col-md-6">
-                    <label for="patient_id" class="form-label" style="font-weight: bold;">اسم المستفيد</label>
+                    <label for="patient_id" class="form-label" style="font-weight: bold;">{{ __('messages.Beneficiary Name') }}</label>
                     <select class="form-select form-select-lg border-dark" id="patient_id" name="patient_id" required>
                         <option id="searchPatient" class="form-control mb-2"></option>
                         @foreach($patients as $patient)
@@ -87,7 +87,7 @@
             <!-- حقل الديون -->
             <div class="row mb-4">
                 <div class="col-12">
-                    <label for="debit" class="form-label" style="font-weight: bold;">المبلغ المالي</label>
+                    <label for="debit" class="form-label" style="font-weight: bold;">{{ __('messages.Amount') }}</label>
                     <input type="number" step="0.01" class="form-control form-control-lg border-dark" id="debit"
                            name="debit" value="{{ $receipt->debit }}" required>
                 </div>
@@ -96,7 +96,7 @@
             <!-- وصف السند -->
             <div class="row mb-4">
                 <div class="col-12">
-                    <label for="description" class="form-label" style="font-weight: bold;">الوصف/التفاصيل</label>
+                    <label for="description" class="form-label" style="font-weight: bold;">{{ __('messages.Description/Details') }}</label>
                     <textarea class="form-control form-control-lg border-dark" id="description" name="description"
                               rows="3">{{ $receipt->description }}</textarea>
                 </div>
@@ -105,12 +105,13 @@
 
         <!-- Footer يحتوي على زر الحفظ -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('messages.Close') }}</button>
             <button type="submit" class="btn btn-primary"
-                    style="background-color: #0d6efd; border-radius: 50px; padding: 10px 20px;">تحديث السند
+                    style="background-color: #0d6efd; border-radius: 50px; padding: 10px 20px;">{{ __('messages.Update Receipt') }}
             </button>
         </div>
     </form>
+
 
 
 

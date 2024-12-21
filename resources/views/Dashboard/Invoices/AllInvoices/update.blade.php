@@ -86,48 +86,36 @@
 @endsection
 @section('content')
 
-    <div>
-        @include('Dashboard.messages_allert')
-        <form action="{{ route('invoices.update', ['invoice' => $singleInvoice->id]) }}" method="POST">
-            @csrf
-            @method('PUT')
+<div>
+    @include('Dashboard.messages_allert')
+    <form action="{{ route('invoices.update', ['invoice' => $singleInvoice->id]) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="row mt-4">
+            <!-- Patient -->
+            <div class="form-group col-md-6">
+                <label for="patient_id">{{ __('messages.Patient') }}</label>
+                <select class="form-control" id="patient_id" name="patient_id" required>
+                    @foreach($patients as $patient)
+                        <option value="{{ $patient->id }}" {{ $patient->id == $singleInvoice->patient->id ? 'selected' : '' }}>
+                            {{ $patient->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-            <div class="row mt-4">
-                <!-- Patient -->
-                <div class="form-group col-md-6">
-                    <label for="patient_id">Patient</label>
-                    <select class="form-control" id="patient_id" name="patient_id" required>
-                        @foreach($patients as $patient)
-                            <option value="{{ $patient->id }}" {{ $patient->id == $singleInvoice->patient->id ? 'selected' : '' }}>
-                                {{ $patient->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Doctor -->
-                <div class="form-group col-md-6">
-                    <label for="doctor_id">Doctor</label>
-                    <select class="form-control" id="doctor_id" name="doctor_id" required>
-                        <option value="">Select Doctor</option>
-                        @foreach($doctors as $doctor)
-                            <option value="{{ $doctor->id }}" data-section-id="{{ $doctor->section->id }}"
-                                    data-section-name="{{ $doctor->section->name }}" {{ $doctor->id == $singleInvoice->doctor->id ? 'selected' : '' }}>
-                                {{ $doctor->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Section (Hidden ID and visible Name) -->
-                <input type="hidden" class="form-control" id="section_id" name="section_id"
-                       value="{{ $singleInvoice->section->id }}" readonly>
-                <div class="form-group col-md-6">
-                    <label for="section_name">Section Name</label>
-                    <input type="text" class="form-control" id="section_name"
-                           value="{{ $singleInvoice->section->name }}" readonly>
-                </div>
-
+            <!-- Doctor -->
+            <div class="form-group col-md-6">
+                <label for="doctor_id">{{ __('messages.Doctor') }}</label>
+                <select class="form-control" id="doctor_id" name="doctor_id" required>
+                    <option value="">{{ __('messages.Select Doctor') }}</option>
+                    @foreach($doctors as $doctor)
+                        <option value="{{ $doctor->id }}" data-section-id="{{ $doctor->section->id }}"
+                                data-section-name="{{ $doctor->section->name }}" {{ $doctor->id == $singleInvoice->doctor->id ? 'selected' : '' }}>
+                            {{ $doctor->name }}
+                        </option>
+                    @endforeach
+                </select>
                 <script>
                     document.getElementById('doctor_id').addEventListener('change', function () {
                         var selectedDoctor = this.options[this.selectedIndex];
@@ -138,217 +126,198 @@
                         document.getElementById('section_name').value = sectionName ? sectionName : '';
                     });
                 </script>
-
-                <!-- Service Type -->
-                <div class="form-group col-md-6">
-                    <label for="service_type">Service Type</label>
-                    <select class="form-control" id="service_type" name="service_type" required>
-                        <option value="" disabled>Select Service Type</option>
-                        <option value="single" {{ $singleInvoice->service_id ? 'selected' : '' }}>Single Service
-                        </option>
-                        <option value="grouped" {{ $singleInvoice->group_id ? 'selected' : '' }}>Grouped Services
-                        </option>
-                    </select>
-                </div>
-
-                <!-- Single Service -->
-                <div class="form-group col-md-6" id="single_service_container"
-                     style="display: {{ $singleInvoice->service_id ? 'block' : 'none' }};">
-                    <label for="single_service_id">Single Service</label>
-                    <select class="form-control" id="single_service_id" name="service_id">
-                        <option value="">Select Single Service</option>
-                        @foreach($services as $service)
-                            <option value="{{ $service->id }}"
-                                    data-price="{{ $service->price }}" {{ $singleInvoice->service_id == $service->id ? 'selected' : '' }}>
-                                {{ $service->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Grouped Services -->
-                <div class="form-group col-md-6" id="grouped_service_container"
-                     style="display: {{ $singleInvoice->group_id ? 'block' : 'none' }};">
-                    <label for="grouped_service_id">Grouped Services</label>
-                    <select class="form-control" id="grouped_service_id" name="group_id">
-                        <option value="">Select Grouped Services</option>
-                        @foreach($groups as $group)
-                            <option value="{{ $group->id }}"
-                                    data-total="{{ $group->total_before_discount }}"
-                                    data-discount="{{ $group->discount_value }}"
-                                    data-tax-rate="{{ $group->tax_rate }}"
-                                    {{ $singleInvoice->group_id == $group->id ? 'selected' : '' }}>
-                                {{ $group->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Price -->
-                <div class="form-group col-md-6">
-                    <label for="price">Price</label>
-                    <input type="number" step="0.01" class="form-control" id="price" name="price"
-                           value="{{ $singleInvoice->price }}" required readonly>
-                </div>
-
-                <!-- Discount -->
-                <div class="form-group col-md-6">
-                    <label for="discount_value">Discount</label>
-                    <input type="number" step="0.01" class="form-control" id="discount_value" name="discount_value"
-                           value="{{ $singleInvoice->discount_value }}" required>
-                </div>
-
-                <!-- Tax Rate -->
-                <div class="form-group col-md-6">
-                    <label for="tax_rate">Tax Rate</label>
-                    <input type="number" step="0.01" class="form-control" id="tax_rate" name="tax_rate"
-                           value="{{ $singleInvoice->tax_rate }}" required>
-                </div>
-
-                <!-- Tax Value -->
-                <div class="form-group col-md-6">
-                    <label for="tax_value">Tax Value</label>
-                    <input type="number" step="0.01" class="form-control" id="tax_value" name="tax_value"
-                           value="{{ $singleInvoice->tax_value }}" readonly>
-                </div>
-
-                <!-- Total with Tax -->
-                <div class="form-group col-md-6">
-                    <label for="tot_with_tax">Total with Tax</label>
-                    <input type="number" step="0.01" class="form-control" id="tot_with_tax" name="tot_with_tax"
-                           value="{{ $singleInvoice->tot_with_tax }}" readonly>
-                </div>
-
-                <!-- Invoice Type -->
-                <div class="form-group col-md-6">
-                    <label for="type">Invoice Type</label>
-                    <select class="form-control" id="type" name="type" required>
-                        <option value="" disabled>Select Type</option>
-                        @if ($singleInvoice->type==1)
-                            <option value="1" selected>monetary</option>
-                            <option value="0">Postponed</option>
-                        @else
-                            <option value="0" selected>Postponed</option>
-
-                        @endif
-                    </select>
-                </div>
-
-                <!-- Invoice Status -->
-                {{-- <div class="form-group col-md-6">
-                    <label for="invoice_status">Invoice Status</label>
-                    <select class="form-control" id="invoice_status" name="type" required>
-                        <option value="" disabled>Select Status</option>
-                        <option value="1" {{ $singleInvoice->type == 1 ? 'selected' : '' }}>Paid</option>
-                        <option value="0" {{ $singleInvoice->type == 0 ? 'selected' : '' }}>Unpaid</option>
-                    </select>
-                </div> --}}
-
-
-                <div class="form-group col-md-6">
-                    <label for="doctor_id">Invoice status</label>
-                    <select class="form-control" id="type" name="invoice_status" required>
-                        <option value="" disabled>Select Status</option>
-                        <option value="1" {{ $singleInvoice->invoice_status == 1 ? 'selected' : '' }}>كشف منتهي</option>
-                        <option value="0" {{ $singleInvoice->invoice_status == 0 ? 'selected' : '' }}>تحت الكشف</option>
-
-                    </select>
-                </div>
             </div>
 
-            <div class="text-right">
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <!-- Section (Hidden ID and visible Name) -->
+            <input type="hidden" class="form-control" id="section_id" name="section_id" value="{{ $singleInvoice->section->id }}" readonly>
+            <div class="form-group col-md-6">
+                <label for="section_name">{{ __('messages.Section Name') }}</label>
+                <input type="text" class="form-control" id="section_name" value="{{ $singleInvoice->section->name }}" readonly>
             </div>
-        </form>
 
-        <!-- JavaScript to handle service type change and calculations -->
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                // Set the initial service type display
-                var serviceType = "{{ $singleInvoice->service_id ? 'single' : ($singleInvoice->group_id ? 'grouped' : '') }}";
-                document.getElementById('service_type').value = serviceType;
+            <!-- Service Type -->
+            <div class="form-group col-md-6">
+                <label for="service_type">{{ __('messages.Service Type') }}</label>
+                <select class="form-control" id="service_type" name="service_type" required>
+                    <option value="" disabled>{{ __('messages.Select Service Type') }}</option>
+                    <option value="single" {{ $singleInvoice->service_id ? 'selected' : '' }}>{{ __('messages.Single Service') }}</option>
+                    <option value="grouped" {{ $singleInvoice->group_id ? 'selected' : '' }}>{{ __('messages.Grouped Services') }}</option>
+                </select>
+            </div>
 
+            <!-- Single Service -->
+            <div class="form-group col-md-6" id="single_service_container" style="display: {{ $singleInvoice->service_id ? 'block' : 'none' }};">
+                <label for="single_service_id">{{ __('messages.Single Service') }}</label>
+                <select class="form-control" id="single_service_id" name="service_id">
+                    <option value="">{{ __('messages.Select Single Service') }}</option>
+                    @foreach($services as $service)
+                        <option value="{{ $service->id }}" data-price="{{ $service->price }}" {{ $singleInvoice->service_id == $service->id ? 'selected' : '' }}>
+                            {{ $service->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- Grouped Services -->
+            <div class="form-group col-md-6" id="grouped_service_container" style="display: {{ $singleInvoice->group_id ? 'block' : 'none' }};">
+                <label for="grouped_service_id">{{ __('messages.Grouped Services') }}</label>
+                <select class="form-control" id="grouped_service_id" name="group_id">
+                    <option value="">{{ __('messages.Select Grouped Services') }}</option>
+                    @foreach($groups as $group)
+                        <option value="{{ $group->id }}" data-total="{{ $group->total_before_discount }}"
+                                data-discount="{{ $group->discount_value }}" data-tax-rate="{{ $group->tax_rate }}" {{ $singleInvoice->group_id == $group->id ? 'selected' : '' }}>
+                            {{ $group->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- Price -->
+            <div class="form-group col-md-6">
+                <label for="price">{{ __('messages.Price') }}</label>
+                <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ $singleInvoice->price }}" required readonly>
+            </div>
+            <script>
+                // Function to calculate the total with tax
+                function calculateInvoice() {
+                    var price = parseFloat(document.getElementById('price').value) || 0;
+                    var discount = parseFloat(document.getElementById('discount_value').value) || 0;
+                    var taxRate = parseFloat(document.getElementById('tax_rate').value) || 0;
+
+        // الحساب قبل الضريبة وبعد الخصم
+                    var totalBeforeTax = price - discount;
+        // حساب قيمة الضريبة
+                    var taxValue = (totalBeforeTax * taxRate) / 100;
+        // المجموع النهائي بعد إضافة الضريبة
+                    var totalWithTax = totalBeforeTax + taxValue;
+
+        // تحديث الحقول تلقائيًا
+                    document.getElementById('tax_value').value = taxValue.toFixed(2);
+                    document.getElementById('tot_with_tax').value = totalWithTax.toFixed(2);
+                }
+
+                // إضافة أحداث عند تغيير الحقول للحساب
+                document.getElementById('price').addEventListener('input', calculateInvoice);
+                document.getElementById('discount_value').addEventListener('input', calculateInvoice);
+                document.getElementById('tax_rate').addEventListener('input', calculateInvoice);
+            </script>
+
+            <!-- Discount -->
+            <div class="form-group col-md-6">
+                <label for="discount_value">{{ __('messages.Discount') }}</label>
+                <input type="number" step="0.01" class="form-control" id="discount_value" name="discount_value" value="{{ $singleInvoice->discount_value }}" required>
+            </div>
+
+            <!-- Tax Rate -->
+            <div class="form-group col-md-6">
+                <label for="tax_rate">{{ __('messages.Tax Rate') }}</label>
+                <input type="number" step="0.01" class="form-control" id="tax_rate" name="tax_rate" value="{{ $singleInvoice->tax_rate }}" required>
+            </div>
+
+            <!-- Tax Value -->
+            <div class="form-group col-md-6">
+                <label for="tax_value">{{ __('messages.Tax Value') }}</label>
+                <input type="number" step="0.01" class="form-control" id="tax_value" name="tax_value" value="{{ $singleInvoice->tax_value }}" readonly>
+            </div>
+
+            <!-- Total with Tax -->
+            <div class="form-group col-md-6">
+                <label for="tot_with_tax">{{ __('messages.Total with Tax') }}</label>
+                <input type="number" step="0.01" class="form-control" id="tot_with_tax" name="tot_with_tax" value="{{ $singleInvoice->tot_with_tax }}" readonly>
+            </div>
+
+            <!-- Invoice Type -->
+            <div class="form-group col-md-6">
+                <label for="type">{{ __('messages.Invoice Type') }}</label>
+                <select class="form-control" id="type" name="type" required>
+                    <option value="" disabled>{{ __('messages.Select Type') }}</option>
+                    @if ($singleInvoice->type==1)
+                        <option value="1" selected>{{ __('messages.monetary') }}</option>
+                        <option value="0">{{ __('messages.Postponed') }}</option>
+                    @else
+                        <option value="0" selected>{{ __('messages.Postponed') }}</option>
+                    @endif
+                </select>
+            </div>
+
+            <!-- Invoice Status -->
+            <div class="form-group col-md-6">
+                <label for="invoice_status">{{ __('messages.Invoice Status') }}</label>
+                <select class="form-control" id="invoice_status" name="invoice_status" required>
+                    <option value="" disabled>{{ __('messages.Select Status') }}</option>
+                    <option value="1" {{ $singleInvoice->invoice_status == 1 ? 'selected' : '' }}>{{ __('messages.كشف منتهي') }}</option>
+                    <option value="0" {{ $singleInvoice->invoice_status == 0 ? 'selected' : '' }}>{{ __('messages.تحت الكشف') }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">{{ __('messages.Submit') }}</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+    <!-- JavaScript to handle calculations -->
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Set the initial service type display
+            var serviceType = "{{ $singleInvoice->service_id ? 'single' : ($singleInvoice->group_id ? 'grouped' : '') }}";
+            document.getElementById('service_type').value = serviceType;
+
+            if (serviceType === 'single') {
+                document.getElementById('single_service_container').style.display = 'block';
+                document.getElementById('grouped_service_container').style.display = 'none';
+            } else if (serviceType === 'grouped') {
+                document.getElementById('single_service_container').style.display = 'none';
+                document.getElementById('grouped_service_container').style.display = 'block';
+            }
+
+            // Handle service type change
+            document.getElementById('service_type').addEventListener('change', function () {
+                var serviceType = this.value;
                 if (serviceType === 'single') {
                     document.getElementById('single_service_container').style.display = 'block';
                     document.getElementById('grouped_service_container').style.display = 'none';
                 } else if (serviceType === 'grouped') {
                     document.getElementById('single_service_container').style.display = 'none';
                     document.getElementById('grouped_service_container').style.display = 'block';
+                } else {
+                    document.getElementById('single_service_container').style.display = 'none';
+                    document.getElementById('grouped_service_container').style.display = 'none';
                 }
-
-                // Handle service type change
-                document.getElementById('service_type').addEventListener('change', function () {
-                    var serviceType = this.value;
-                    if (serviceType === 'single') {
-                        document.getElementById('single_service_container').style.display = 'block';
-                        document.getElementById('grouped_service_container').style.display = 'none';
-                    } else if (serviceType === 'grouped') {
-                        document.getElementById('single_service_container').style.display = 'none';
-                        document.getElementById('grouped_service_container').style.display = 'block';
-                    } else {
-                        document.getElementById('single_service_container').style.display = 'none';
-                        document.getElementById('grouped_service_container').style.display = 'none';
-                    }
-                    document.getElementById('price').value = ''; // Reset price
-                });
-
-                // Update price, discount, and tax based on selected grouped service
-                document.getElementById('grouped_service_id').addEventListener('change', function () {
-                    var selectedGroup = this.options[this.selectedIndex];
-                    document.getElementById('price').value = selectedGroup.getAttribute('data-total') || '';
-                    document.getElementById('discount_value').value = selectedGroup.getAttribute('data-discount') || '';
-                    document.getElementById('tax_rate').value = selectedGroup.getAttribute('data-tax-rate') || '';
-                    calculateInvoice();
-                });
-
-                // Calculate total with tax
-                function calculateInvoice() {
-                    var price = parseFloat(document.getElementById('price').value) || 0;
-                    var discount = parseFloat(document.getElementById('discount_value').value) || 0;
-                    var taxRate = parseFloat(document.getElementById('tax_rate').value) || 0;
-                    var totalBeforeTax = price - discount;
-                    var taxValue = (totalBeforeTax * taxRate) / 100;
-                    var totalWithTax = totalBeforeTax + taxValue;
-                    document.getElementById('tax_value').value = taxValue.toFixed(2);
-                    document.getElementById('tot_with_tax').value = totalWithTax.toFixed(2);
-                }
-
-                // Recalculate when values change
-                document.getElementById('price').addEventListener('input', calculateInvoice);
-                document.getElementById('discount_value').addEventListener('input', calculateInvoice);
-                document.getElementById('tax_rate').addEventListener('input', calculateInvoice);
+                document.getElementById('price').value = ''; // Reset price
             });
-        </script>
 
-    </div>
-    </div>
-    </div>
-    </div>
+            // Update price, discount, and tax based on selected grouped service
+            document.getElementById('grouped_service_id').addEventListener('change', function () {
+                var selectedGroup = this.options[this.selectedIndex];
+                document.getElementById('price').value = selectedGroup.getAttribute('data-total') || '';
+                document.getElementById('discount_value').value = selectedGroup.getAttribute('data-discount') || '';
+                document.getElementById('tax_rate').value = selectedGroup.getAttribute('data-tax-rate') || '';
+                calculateInvoice();
+            });
 
-    <!-- JavaScript to handle calculations -->
-    <script>
-        // Function to calculate the total with tax
-        function calculateInvoice() {
-            var price = parseFloat(document.getElementById('price').value) || 0;
-            var discount = parseFloat(document.getElementById('discount_value').value) || 0;
-            var taxRate = parseFloat(document.getElementById('tax_rate').value) || 0;
+            // Calculate total with tax
+            function calculateInvoice() {
+                var price = parseFloat(document.getElementById('price').value) || 0;
+                var discount = parseFloat(document.getElementById('discount_value').value) || 0;
+                var taxRate = parseFloat(document.getElementById('tax_rate').value) || 0;
+                var totalBeforeTax = price - discount;
+                var taxValue = (totalBeforeTax * taxRate) / 100;
+                var totalWithTax = totalBeforeTax + taxValue;
+                document.getElementById('tax_value').value = taxValue.toFixed(2);
+                document.getElementById('tot_with_tax').value = totalWithTax.toFixed(2);
+            }
 
-// الحساب قبل الضريبة وبعد الخصم
-            var totalBeforeTax = price - discount;
-// حساب قيمة الضريبة
-            var taxValue = (totalBeforeTax * taxRate) / 100;
-// المجموع النهائي بعد إضافة الضريبة
-            var totalWithTax = totalBeforeTax + taxValue;
-
-// تحديث الحقول تلقائيًا
-            document.getElementById('tax_value').value = taxValue.toFixed(2);
-            document.getElementById('tot_with_tax').value = totalWithTax.toFixed(2);
-        }
-
-        // إضافة أحداث عند تغيير الحقول للحساب
-        document.getElementById('price').addEventListener('input', calculateInvoice);
-        document.getElementById('discount_value').addEventListener('input', calculateInvoice);
-        document.getElementById('tax_rate').addEventListener('input', calculateInvoice);
+            // Recalculate when values change
+            document.getElementById('price').addEventListener('input', calculateInvoice);
+            document.getElementById('discount_value').addEventListener('input', calculateInvoice);
+            document.getElementById('tax_rate').addEventListener('input', calculateInvoice);
+        });
     </script>
 
 
@@ -357,6 +326,9 @@
 
 @endsection
 @section('js')
+
+  <!-- JavaScript to handle service type change and calculations -->
+
     <!-- Internal Data tables -->
 
     <script src="{{URL::asset('Dashboard/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
@@ -377,5 +349,39 @@
     <script src="{{URL::asset('Dashboard/plugins/notify/js/notifIt.js')}}"></script>
     <script src="{{URL::asset('Dashboard/plugins/notify/js/notifit-custom.js')}}"></script>
     <!-- JavaScript to handle calculations -->
+   <script>
+    document.getElementById('single_service_id').addEventListener('change', function () {
+    var selectedService = this.options[this.selectedIndex];
+    var price = selectedService.getAttribute('data-price'); // جلب قيمة السعر من الخاصية
+    document.getElementById('price').value = price || ''; // تحديث حقل السعر
+    calculateInvoice(); // إعادة حساب الفاتورة إذا لزم الأمر
+});
+document.getElementById('service_type').addEventListener('change', function () {
+    var serviceType = this.value;
+    if (serviceType === 'single') {
+        document.getElementById('single_service_container').style.display = 'block';
+        document.getElementById('grouped_service_container').style.display = 'none';
+    } else if (serviceType === 'grouped') {
+        document.getElementById('single_service_container').style.display = 'none';
+        document.getElementById('grouped_service_container').style.display = 'block';
+    } else {
+        document.getElementById('single_service_container').style.display = 'none';
+        document.getElementById('grouped_service_container').style.display = 'none';
+    }
+    document.getElementById('price').value = ''; // إعادة تعيين السعر
+});
+function calculateInvoice() {
+    var price = parseFloat(document.getElementById('price').value) || 0;
+    var discount = parseFloat(document.getElementById('discount_value').value) || 0;
+    var taxRate = parseFloat(document.getElementById('tax_rate').value) || 0;
 
+    var totalBeforeTax = price - discount;
+    var taxValue = (totalBeforeTax * taxRate) / 100;
+    var totalWithTax = totalBeforeTax + taxValue;
+
+    document.getElementById('tax_value').value = taxValue.toFixed(2);
+    document.getElementById('tot_with_tax').value = totalWithTax.toFixed(2);
+}
+
+   </script>
 @endsection

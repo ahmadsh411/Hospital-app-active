@@ -116,7 +116,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">تشخيصات المريض</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ الأدوية والتشخيصات</span>
+                <h4 class="content-title mb-0 my-auto">{{ __('messages.patient_diagnoses') }}</h4>
+                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('messages.medications_and_diagnoses') }}</span>
             </div>
         </div>
     </div>
@@ -125,11 +126,11 @@
 
 @section('content')
     <div class="container">
-        <h2 class="text-center"><i class="fas fa-notes-medical"></i> التشخيصات والأدوية</h2>
+        <h2 class="text-center"><i class="fas fa-notes-medical"></i> {{ __('messages.diagnoses_and_medications') }}</h2>
 
         @if($medicals->isEmpty())
             <div class="alert alert-info text-center">
-                <i class="fas fa-info-circle"></i> لا توجد تشخيصات لهذا المريض.
+                <i class="fas fa-info-circle"></i> {{ __('messages.no_diagnoses_for_patient') }}
             </div>
         @else
             <div class="diagnosis-container">
@@ -139,13 +140,13 @@
                             <h5 class="card-title date-section"><i class="fas fa-calendar-alt"></i> {{ $medical->date }}
                             </h5>
                             <p class="card-text patient-section"><i class="fas fa-user"></i>
-                                المريض: {{ $medical->patient->name }}</p>
-                            <p class="card-text doctor-section"><i class="fas fa-user-md"></i> الطبيب
-                                المعالج: {{ $medical->doctor->name }}</p>
+                                {{ __('messages.patient') }}: {{ $medical->patient->name }}</p>
+                            <p class="card-text doctor-section"><i class="fas fa-user-md"></i>
+                                {{ __('messages.treating_doctor') }}: {{ $medical->doctor->name }}</p>
                             <p class="card-text diagnosis-section"><i class="fas fa-stethoscope"></i>
-                                التشخيص: {{ $medical->translate('ar')->diagnoses_notes }}</p>
+                                {{ __('messages.diagnosis') }}: {{ $medical->translate('ar')->diagnoses_notes }}</p>
                             <p class="card-text medicals-section"><i class="fas fa-pills"></i>
-                                الأدوية: {{ $medical->medicals }}</p>
+                                {{ __('messages.medications') }}: {{ $medical->medicals }}</p>
                         </div>
                     </div>
                 @endforeach

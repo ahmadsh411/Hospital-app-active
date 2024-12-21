@@ -5,8 +5,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    {{ trans('doctors.delete_select') }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    {{ trans('doctors.delete_selected') }}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="{{ trans('common.close') }}">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -14,13 +15,17 @@
                 {{ method_field('delete') }}
                 {{ csrf_field() }}
                 <div class="modal-body">
-                    <h5>Are you shore You Delete Selected Doctor</h5>
+                    <h5>{{ trans('doctors.confirm_delete_selected') }}</h5>
                     <input type="hidden" id="delete_select_id" name="delete_select_id" value=''>
-                    <input type="hidden"  name="page_id" value='2'>
+                    <input type="hidden" name="page_id" value='2'>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        {{ trans('doctors.close') }}
+                    </button>
+                    <button type="submit" class="btn btn-danger">
+                        {{ trans('doctors.delete') }}
+                    </button>
                 </div>
             </form>
         </div>

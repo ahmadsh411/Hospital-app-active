@@ -15,7 +15,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الفواتير والإشعاعات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ الكل</span>
+                <h4 class="content-title mb-0 my-auto">{{ __('messages.invoices_and_rays') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('messages.all') }}</span>
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
                     <div class="card-header" id="heading-{{$invoice->id}}">
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse-{{$invoice->id}}" aria-expanded="false" aria-controls="collapse-{{$invoice->id}}">
-                                إشعاعات مرتبطة بفاتورة #{{$invoice->patient->name}}
+                                {{ __('messages.rays_associated_with') }} #{{$invoice->patient->name}}
                             </button>
                         </h5>
                     </div>
@@ -54,11 +54,11 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th>الوصف</th>
-                                    <th>المريض</th>
-                                    <th>الطبيب</th>
-                                    <th>الصورة المرفقة/ان وجدت </th>
-                                    <th>العمليات</th>
+                                    <th>{{ __('messages.description') }}</th>
+                                    <th>{{ __('messages.patient') }}</th>
+                                    <th>{{ __('messages.doctor') }}</th>
+                                    <th>{{ __('messages.attached_image') }}</th>
+                                    <th>{{ __('messages.operations') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -77,18 +77,20 @@
                                                     @endif
                                                 @endforeach
                                             @else
-                                                <strong>No Images</strong>
+                                                <strong>{{ __('messages.no_images') }}</strong>
                                             @endif
                                         </td>
                                         <td>
                                             @if($ray->status==0)
                                                 <a href="{{route('staff.x-ray-edit',['id'=>$ray->id])}}" class="btn btn-success" >
-                                                    <i class="fas fa-plus"></i> انجاز  إشعاع
+                                                    <i class="fas fa-plus"></i> {{ __('messages.complete_ray') }}
                                                 </a>
 
                                             @else
-                                                <strong>تم انجاز الاشعة وارسالها للدكتور </strong>
+                                                <strong>{{ __('messages.ray_completed') }}</strong>
+
                                             @endif
+
                                         </td>
                                     </tr>
                                     @endif
@@ -103,6 +105,7 @@
         @endforeach
     </div>
 @endsection
+
 
 @section('js')
     <script src="{{URL::asset('Dashboard/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>

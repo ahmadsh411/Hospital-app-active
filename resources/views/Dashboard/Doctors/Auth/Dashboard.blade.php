@@ -66,7 +66,7 @@
             <div class="overflow-hidden card sales-card bg-primary-gradient">
                 <div class="pt-0 pt-3 pb-2 pl-3 pr-3">
                     <div class="">
-                        <h2 class="mb-3 text-white tx-12">القسم </h2>
+                        <h2 class="mb-3 text-white tx-12">{{__('messages.Section')}} </h2>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex align-items-center">
@@ -112,7 +112,7 @@
             <div class="overflow-hidden card sales-card bg-success-gradient">
                 <div class="pt-0 pt-3 pb-2 pl-3 pr-3">
                     <div class="">
-                        <h2 class="mb-3 text-white tx-12">المرضى تحت الكشف</h2>
+                        <h2 class="mb-3 text-white tx-12">{{ __('messages.Patients Under Review') }}</h2>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex align-items-center">
@@ -123,7 +123,7 @@
                                 <h4 class="mb-1 text-white tx-20 font-weight-bold" style="margin-left: 15px;"
 
                                 >
-                                    {{ $doctor->allinvoices->where('invoice_status', 0)->count()  }}:<span>من المرضى</span>
+                                    {{ $doctor->allinvoices->where('invoice_status', 0)->count()  }}:<span>{{ __('messages.Patients') }}</span>
                                 </h4>
                             </div>
                         </div>
@@ -155,7 +155,7 @@
             <div class="overflow-hidden card sales-card bg-purple-gradient">
                 <div class="pt-0 pt-3 pb-2 pl-3 pr-3">
                     <div class="">
-                        <h2 class="mb-3 text-white tx-12">المرضى الذين انتهت مراجعاتهم</h2>
+                        <h2 class="mb-3 text-white tx-12">{{ __('messages.Patients Whose Reviews Are Finished') }}</h2>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex align-items-center">
@@ -164,7 +164,7 @@
                     </span>
                             <div class="ml-3">
                                 <h4 class="mb-1 text-white tx-20 font-weight-bold" style="margin-left: 15px;">
-                                     {{ $doctor->allinvoices->where('invoice_status',1)->count()  }}:<span>من المرضى</span>
+                                     {{ $doctor->allinvoices->where('invoice_status',1)->count()  }}:<span>{{ __('messages.Patients') }}</span>
                                 </h4>
                             </div>
                         </div>
@@ -196,7 +196,7 @@
             <div class="overflow-hidden card sales-card bg-secondary-gradient">
                 <div class="pt-0 pt-3 pb-2 pl-3 pr-3">
                     <div class="">
-                        <h2 class="mb-3 text-white tx-12">المرضى الممنوحون مراجعات اخرى</h2>
+                        <h2 class="mb-3 text-white tx-12">{{ __('messages.Patients Given Additional Reviews') }}</h2>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex align-items-center">
@@ -205,7 +205,7 @@
                     </span>
                             <div class="ml-3">
                                 <h4 class="mb-1 text-white tx-20 font-weight-bold">
-                                    {{ $doctor->allinvoices->where('invoice_status',2)->count()  }}:<span>من المرضى</span>
+                                    {{ $doctor->allinvoices->where('invoice_status',2)->count()  }}:<span>{{ __('messages.Patients') }}</span>
                                 </h4>
                             </div>
                         </div>
@@ -245,7 +245,8 @@
             <div class="overflow-hidden card sales-card bg-warning-gradient">
                 <div class="pt-0 pt-3 pb-2 pl-3 pr-3">
                     <div class="">
-                        <h2 class="mb-3 text-white tx-12">الخدمات المفردة</h2>
+                        <h2 class="mb-3 text-white tx-12">{{ __('messages.Single Services') }}</h2>
+
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex align-items-center">
@@ -254,7 +255,7 @@
                     </span>
                             <div class="ml-3">
                                 <h4 class="mb-1 text-white tx-20 font-weight-bold">
-                                     {{ $doctor->allInvoices->where('invoice_type',0)->count() }}:<span>من الخدمات</span>
+                                     {{ $doctor->allInvoices->where('invoice_type',0)->count() }}:<span>{{ __('messages.Of Services') }}</span>
                                 </h4>
                             </div>
                         </div>
@@ -287,8 +288,7 @@
             <div class="overflow-hidden card sales-card bg-primary-gradient">
                 <div class="pt-0 pt-3 pb-2 pl-3 pr-3">
                     <div class="">
-                        <h2 class="mb-3 text-white tx-12">العروض </h2>
-                    </div>
+                        <h2 class="mb-3 text-white tx-12">{{ __('messages.Offers') }}</h2>                    </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex align-items-center">
                     <span class="icon-container4">
@@ -296,7 +296,7 @@
                     </span>
                             <div class="ml-3">
                                 <h4 class="mb-1 text-white tx-20 font-weight-bold">
-                                    {{ $doctor->allinvoices->where('invoice_type',1)->count() }}:<span>من الخدمات</span>
+                                    {{ $doctor->allinvoices->where('invoice_type', 1)->count() }}:<span>{{ __('messages.of services') }}</span>
                                 </h4>
                             </div>
                         </div>
@@ -329,7 +329,7 @@
             <div class="overflow-hidden card sales-card bg-success-gradient">
                 <div class="pt-0 pt-3 pb-2 pl-3 pr-3">
                     <div class="">
-                        <h2 class="mb-3 text-white tx-12">المبالغ المقبوضة</h2>
+                        <h2 class="mb-3 text-white tx-12">{{ __('messages.Received Amounts') }}</h2>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex align-items-center">
@@ -397,7 +397,7 @@
             <div class="overflow-hidden card sales-card bg-primary-gradient">
                 <div class="pt-0 pt-3 pb-2 pl-3 pr-3">
                     <div class="">
-                        <h2 class="mb-3 text-white tx-12">المبالغ الغير مقبوضة</h2>
+                        <h2 class="mb-3 text-white tx-12">{{ __('messages.Unreceived Amounts') }}</h2>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex align-items-center">
@@ -444,32 +444,30 @@
             <div class="card">
                 <div class="card-header bg-transparent pd-b-0 pd-t-20 bd-b-0">
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title mb-0">Order status</h4>
+                        <h4 class="card-title mb-0">{{ __('messages.Order Status') }}</h4>
                         <i class="mdi mdi-dots-horizontal text-gray"></i>
                     </div>
-                    <p class="tx-12 text-muted mb-0">Order Status and Tracking. Track your order from ship date to
-                        arrival. To begin, enter your order number.</p>
+                    <p class="tx-12 text-muted mb-0">{{ __('messages.Order Status Description') }}</p>
                 </div>
                 <div class="card-body">
                     <div class="total-revenue">
                         <div>
                             <h4>120,750</h4>
-                            <label><span class="bg-primary"></span>success</label>
+                            <label><span class="bg-primary"></span>{{ __('messages.Success') }}</label>
                         </div>
                         <div>
                             <h4>56,108</h4>
-                            <label><span class="bg-danger"></span>Pending</label>
+                            <label><span class="bg-danger"></span>{{ __('messages.Pending') }}</label>
                         </div>
                         <div>
                             <h4>32,895</h4>
-                            <label><span class="bg-warning"></span>Failed</label>
+                            <label><span class="bg-warning"></span>{{ __('messages.Failed') }}</label>
                         </div>
                     </div>
                     <div id="bar" class="sales-bar mt-4"></div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="row row-sm">
@@ -481,10 +479,9 @@
                             <div class="tabs-menu1">
                                 <!-- Tabs -->
                                 <ul class="nav panel-tabs main-nav-line">
-                                    <li class="nav-item"><a href="#patientInfo" class="nav-link active" data-toggle="tab">معلومات المريض</a></li>
-
-                                    <li class="nav-item"><a href="#xray" class="nav-link" data-toggle="tab">الاشعه</a></li>
-                                    <li class="nav-item"><a href="#laboratory" class="nav-link" data-toggle="tab">المختبر</a></li>
+                                    <li class="nav-item"><a href="#patientInfo" class="nav-link active" data-toggle="tab">{{ __('messages.Patient Information') }}</a></li>
+                                    <li class="nav-item"><a href="#xray" class="nav-link" data-toggle="tab">{{ __('messages.X-ray') }}</a></li>
+                                    <li class="nav-item"><a href="#laboratory" class="nav-link" data-toggle="tab">{{ __('messages.Laboratory') }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -499,12 +496,12 @@
                                             <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>اسم المريض</th>
-                                                <th>رقم الهاتف</th>
-                                                <th>البريد الإلكتروني</th>
-                                                <th>تاريخ الميلاد</th>
-                                                <th>النوع</th>
-                                                <th>فصيلة الدم</th>
+                                                <th>{{ __('messages.Patient Name') }}</th>
+                                                <th>{{ __('messages.Phone Number') }}</th>
+                                                <th>{{ __('messages.Email Address') }}</th>
+                                                <th>{{ __('messages.Date of Birth') }}</th>
+                                                <th>{{ __('messages.Gender') }}</th>
+                                                <th>{{ __('messages.Blood Type') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -515,7 +512,7 @@
                                                     <td>{{ $invoice->patient->phone }}</td>
                                                     <td>{{ $invoice->patient->email }}</td>
                                                     <td>{{ $invoice->patient->date_of_birth }}</td>
-                                                    <td>{{ $invoice->patient->gender_id == 1 ? 'ذكر' : 'أنثى' }}</td>
+                                                    <td>{{ $invoice->patient->gender_id == 1 ? __('messages.Male') : __('messages.Female') }}</td>
                                                     <td>{{ $invoice->patient->bloodtype->type }}</td>
                                                 </tr>
                                             @endforeach
@@ -524,8 +521,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Invoices Tab -->
-
+                                <!-- X-ray Tab -->
                                 <div class="tab-pane" id="xray">
                                     <div class="table-responsive">
                                         <table class="table table-hover text-md-nowrap text-center"
@@ -533,22 +529,17 @@
                                             <thead>
                                             <tr>
                                                 <th>#</th>
-
-                                                <th>اسم المريض</th>
-                                                <th>اسم الخدمة او العرض</th>
-                                                <th>الوصف</th>
-                                                <th>الصورة</th>
-                                                <th>الاجراء</th>
-
-
-
+                                                <th>{{ __('messages.Patient Name') }}</th>
+                                                <th>{{ __('messages.Service or Offer Name') }}</th>
+                                                <th>{{ __('messages.Description') }}</th>
+                                                <th>{{ __('messages.Image') }}</th>
+                                                <th>{{ __('messages.Status') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             @foreach(\App\Models\Rays\Ray::where('doctor_id',auth('doctor')->user()->id)->latest()->take(5)->get() as $patientRay)
                                                 <tr>
                                                     <td>{{$loop->iteration}}</td>
-
                                                     <td>{{$patientRay->patient->name}}</td>
                                                     <td>
                                                         @if(isset($patientRay->invoice->service))
@@ -558,8 +549,6 @@
                                                         @endif
                                                     </td>
                                                     <td>{{$patientRay->description}}</td>
-
-                                                    <!-- عرض جميع الصور المرتبطة بالشعاع -->
                                                     <td>
                                                         @if($patientRay->images->count() > 0 )
                                                             @foreach($patientRay->images as $image)
@@ -568,96 +557,76 @@
                                                                          style="width: 150px; border-radius: 10%; height: 80px; margin-right: 10px;">
                                                                 @endif
                                                             @endforeach
-
                                                         @else
-                                                            <span>لا توجد صور</span>
+                                                            <span>{{ __('messages.No Images Available') }}</span>
                                                         @endif
                                                     </td>
                                                     <td>
                                                         @if($patientRay->status==0)
-                                                            <strong > تم الاجراء </strong>
-                                                            @else
-                                                        <strong>لم يتم الاجراء بعد</strong>
+                                                            <strong>{{ __('messages.Completed') }}</strong>
+                                                        @else
+                                                            <strong>{{ __('messages.Not Completed') }}</strong>
                                                         @endif
                                                     </td>
-
-
                                                 </tr>
                                                 <br>
                                                 @include('Dashboard.Doctors.DoctorDashboard.Invoices.delete')
                                             @endforeach
-
-
                                             </tbody>
                                         </table>
-
-                                    </div> <!-- محتويات الجدول للأشعة -->
+                                    </div>
                                 </div>
 
+                                <!-- Laboratory Tab -->
                                 <div class="tab-pane" id="laboratory">
-                                    <div class="tab-pane" id="tab6">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover text-md-nowrap text-center"
-                                                   id="example1">
-                                                <thead>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover text-md-nowrap text-center"
+                                               id="example1">
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>{{ __('messages.Patient Name') }}</th>
+                                                <th>{{ __('messages.Service or Offer Name') }}</th>
+                                                <th>{{ __('messages.Description') }}</th>
+                                                <th>{{ __('messages.Image') }}</th>
+                                                <th>{{ __('messages.Status') }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach(\App\Models\Laboratories\Laboratory::where('doctor_id',auth('doctor')->user()->id)->latest()->take(5)->get() as $patientLaboratory)
                                                 <tr>
-                                                    <th>#</th>
-
-                                                    <th>اسم المريض</th>
-                                                    <th>اسم الخدمة او العرض</th>
-                                                    <th>الوصف</th>
-                                                    <th>الصورة</th>
-                                                    <th>الاجراء</th>
-
-
-
+                                                    <td>{{$loop->iteration}}</td>
+                                                    <td>{{$patientLaboratory->patient->name}}</td>
+                                                    <td>
+                                                        @if(isset($patientLaboratory->invoice->service))
+                                                            {{$patientLaboratory->invoice->service->name}}
+                                                        @elseif(isset($patientLaboratory->invoice->group))
+                                                            {{$patientLaboratory->invoice->group->name}}
+                                                        @endif
+                                                    </td>
+                                                    <td>{{$patientLaboratory->description}}</td>
+                                                    <td>
+                                                        @if($patientLaboratory->image)
+                                                            <img src="{{ asset('Dashboard/img/Laboratory/'.$patientLaboratory->patient->name.'/'.$patientLaboratory->id.'/'.$image->filename) }}"
+                                                                 style="width: 150px; border-radius: 10%; height: 80px; margin-right: 10px;">
+                                                        @else
+                                                            <span>{{ __('messages.No Images Available') }}</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if($patientLaboratory->status==1)
+                                                            <strong>{{ __('messages.Completed') }}</strong>
+                                                        @else
+                                                            <strong>{{ __('messages.Not Completed') }}</strong>
+                                                        @endif
+                                                    </td>
                                                 </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach(\App\Models\Laboratories\Laboratory::where('doctor_id',auth('doctor')->user()->id)->latest()->take(5)->get() as $patientLaboratory)
-                                                    <tr>
-                                                        <td>{{$loop->iteration}}</td>
-
-                                                        <td>{{$patientLaboratory->patient->name}}</td>
-                                                        <td>
-                                                            @if(isset($patientLaboratory->invoice->service))
-                                                                {{$patientLaboratory->invoice->service->name}}
-                                                            @elseif(isset($patientLaboratory->invoice->group))
-                                                                {{$patientLaboratory->invoice->group->name}}
-                                                            @endif
-                                                        </td>
-                                                        <td>{{$patientLaboratory->description}}</td>
-
-                                                        <!-- عرض جميع الصور المرتبطة بالشعاع -->
-                                                        <td>
-                                                            @if($patientLaboratory->image)
-
-                                                                <img src="{{ asset('Dashboard/img/Laboratory/'.$patientLaboratory->patient->name.'/'.$patientLaboratory->id.'/'.$image->filename) }}"
-                                                                     style="width: 150px; border-radius: 10%; height: 80px; margin-right: 10px;">
-
-                                                            @else
-                                                                <span>لا توجد صور</span>
-                                                            @endif
-                                                        </td>
-                                                        <td>
-                                                            @if($patientLaboratory->status==1)
-                                                                <strong>تم الاجراء</strong>
-                                                            @else
-                                                            <strong>لم يتم الاجراء</strong>
-                                                            @endif
-                                                        </td>
-
-
-                                                    </tr>
-                                                    @include('Dashboard.Doctors.DoctorDashboard.Invoices.Laboratory.delete')
-                                                @endforeach
-
-
-                                                </tbody>
-                                            </table>
-
-                                        </div>
+                                                @include('Dashboard.Doctors.DoctorDashboard.Invoices.Laboratory.delete')
+                                            @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
+                                </div>
 
                             </div>
                         </div>
@@ -665,48 +634,47 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-    </div>
+
     <!-- row closed -->
 
 
     <div class="row row-sm row-deck">
         <div class="col-md-12 col-lg-12 col-xl-12">
             <div class="pb-2 card card-dashboard-eight">
-                <h6 class="card-title">Top Medical Advanced Countries</h6>
-                <span class="d-block mg-b-10 text-muted tx-12">Medical advancements and average doctor salary by country</span>
+                <h6 class="card-title">{{ __('messages.Top Medical Advanced Countries') }}</h6>
+                <span class="d-block mg-b-10 text-muted tx-12">{{ __('messages.Medical advancements and average doctor salary by country') }}</span>
                 <div class="list-group">
                     <!-- Add items here for each country -->
                     <div class="list-group-item border-top-0">
                         <i class="flag-icon flag-icon-us flag-icon-squared"></i>
-                        <p>United States</p><span>$230,000</span>
+                        <p>{{ __('messages.United States') }}</p><span>{{ __('messages.USD_230K') }}</span>
                     </div>
                     <div class="list-group-item">
                         <i class="flag-icon flag-icon-de flag-icon-squared"></i>
-                        <p>Germany</p><span>$185,000</span>
+                        <p>{{ __('messages.Germany') }}</p><span>{{ __('messages.USD_185K') }}</span>
                     </div>
                     <div class="list-group-item">
                         <i class="flag-icon flag-icon-gb flag-icon-squared"></i>
-                        <p>United Kingdom</p><span>$120,000</span>
+                        <p>{{ __('messages.United Kingdom') }}</p><span>{{ __('messages.USD_120K') }}</span>
                     </div>
                     <div class="list-group-item">
                         <i class="flag-icon flag-icon-ch flag-icon-squared"></i>
-                        <p>Switzerland</p><span>$200,000</span>
+                        <p>{{ __('messages.Switzerland') }}</p><span>{{ __('messages.USD_200K') }}</span>
                     </div>
                     <div class="list-group-item">
                         <i class="flag-icon flag-icon-nl flag-icon-squared"></i>
-                        <p>Netherlands</p><span>$135,000</span>
+                        <p>{{ __('messages.Netherlands') }}</p><span>{{ __('messages.USD_135K') }}</span>
                     </div>
                     <div class="mb-0 list-group-item border-bottom-0">
                         <i class="flag-icon flag-icon-au flag-icon-squared"></i>
-                        <p>Australia</p><span>$150,000</span>
+                        <p>{{ __('messages.Australia') }}</p><span>{{ __('messages.USD_150K') }}</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- /row -->
     </div>
     </div>
@@ -827,4 +795,5 @@
         });
 
     </script>
+
 @endsection

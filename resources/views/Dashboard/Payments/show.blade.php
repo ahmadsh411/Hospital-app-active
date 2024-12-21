@@ -120,30 +120,30 @@
     <div class="row">
         <div class="receipt-container" id="printable-receipt">
             <div class="receipt-header">
-                <div class="receipt-title">سند قبض</div>
-                <h2>شركة البركة</h2>
-                <p>123 الشارع الرئيسي، المدينة، الدولة</p>
+                <div class="receipt-title">{{ __('messages.Receipt Voucher') }}</div>
+                <h2>{{ __('messages.Hospital Name') }}</h2>
+                <p>{{ __('messages.Hospital Address') }}</p>
             </div>
 
             <div class="receipt-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="beneficiary-name">اسم المستفيد:</label>
+                        <label for="beneficiary-name">{{ __('messages.Beneficiary Name') }}:</label>
                         <span class="receipt-info" id="beneficiary-name">{{ $payment->patient->name }}</span>
                     </div>
                     <div class="col-md-6 text-right">
-                        <label for="receipt-date">التاريخ:</label>
+                        <label for="receipt-date">{{ __('messages.Date') }}:</label>
                         <span class="receipt-info" id="receipt-date">{{ $payment->date }}</span>
                     </div>
                 </div>
 
                 <div class="row mt-4">
                     <div class="col-md-8">
-                        <label for="description">الوصف:</label>
+                        <label for="description">{{ __('messages.Description') }}:</label>
                         <span class="receipt-info" id="description">{{ $payment->description }}</span>
                     </div>
                     <div class="col-md-4 text-right">
-                        <label for="amount">المبلغ:</label>
+                        <label for="amount">{{ __('messages.Amount') }}:</label>
                         <span class="receipt-info" id="amount">{{ $payment->debit }}</span>
                     </div>
                 </div>
@@ -152,11 +152,11 @@
             <div class="receipt-footer mt-5">
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="employee-name">اسم الموظف:</label>
+                        <label for="employee-name">{{ __('messages.Employee Name') }}:</label>
                         <span class="receipt-info" id="employee-name"></span>
                     </div>
                     <div class="col-md-6 text-right">
-                        <label for="signature">التوقيع:</label>
+                        <label for="signature">{{ __('messages.Signature') }}:</label>
                         <div class="signature-line" id="signature"></div>
                     </div>
                 </div>
@@ -165,10 +165,11 @@
 
         <!-- زر الطباعة -->
         <div class="text-center mt-4">
-            <button onclick="printReceipt()" class="btn btn-primary">طباعة السند</button>
+            <button onclick="printReceipt()" class="btn btn-primary">{{ __('messages.Print Receipt') }}</button>
         </div>
     </div>
 @endsection
+
 
 @section('js')
     <script>

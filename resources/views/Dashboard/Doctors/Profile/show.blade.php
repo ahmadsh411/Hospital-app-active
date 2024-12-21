@@ -16,8 +16,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Pages</h4><span
-                        class="text-muted mt-1 tx-13 mr-2 mb-0">/ Empty</span>
+                <h4 class="content-title mb-0 my-auto">{{ __('messages.doctor') }}</h4>
+                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('messages.profile') }}</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
@@ -52,74 +52,72 @@
 
 @endsection
 @section('content')
-<div class="container my-5">
-    <div class="card shadow-lg border-0">
-        <!-- عنوان البطاقة -->
-        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-            <h3 class="mb-0">معلومات الدكتور</h3>
-            <a href="{{ route('doctor.dashboard') }}" class="btn btn-light btn-sm">
-                <i class="fas fa-arrow-left"></i> رجوع
-            </a>
-        </div>
-
-        <!-- محتوى البطاقة -->
-        <div class="card-body">
-            <div class="text-center mb-4">
-                @if($doctor->image)
-                <img src="{{ asset('Dashboard/img/doctors/'.'/'.$doctor->image->filename) }}" alt="الصورة الحالية" class="img-thumbnail mb-3" style="width: 150px; height: 150px;">
-                @else
-                <i class="fas fa-user-md fa-5x text-primary mb-3"></i>
-                @endif
-                <h4 class="card-title">{{ $doctor->email }}</h4>
-
-                <!-- زر الحالة مع وميض -->
-                <span
-                    class="badge badge-lg px-4 py-2 text-white {{ $doctor->status ? 'bg-success status-badge' : 'bg-danger status-badge' }}">
-                    {{ $doctor->status ? 'نشط' : 'غير نشط' }}
-                </span>
+    <div class="container my-5">
+        <div class="card shadow-lg border-0">
+            <!-- Header -->
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">{{ __('messages.doctor_info') }}</h3>
+                <a href="{{ route('doctor.dashboard') }}" class="btn btn-light btn-sm">
+                    <i class="fas fa-arrow-left"></i> {{ __('messages.back') }}
+                </a>
             </div>
 
-            <!-- الجدول لتفاصيل الدكتور -->
-            <table class="table table-striped">
-                <tbody>
+            <!-- Card Content -->
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    @if($doctor->image)
+                        <img src="{{ asset('Dashboard/img/doctors/'.'/'.$doctor->image->filename) }}" alt="{{ __('messages.current_image') }}" class="img-thumbnail mb-3" style="width: 150px; height: 150px;">
+                    @else
+                        <i class="fas fa-user-md fa-5x text-primary mb-3"></i>
+                    @endif
+                    <h4 class="card-title">{{ $doctor->email }}</h4>
+
+                    <!-- Status Badge -->
+                    <span
+                        class="badge badge-lg px-4 py-2 text-white {{ $doctor->status ? 'bg-success status-badge' : 'bg-danger status-badge' }}">
+                    {{ $doctor->status ? __('messages.active') : __('messages.inactive') }}
+                </span>
+                </div>
+
+                <!-- Doctor Details Table -->
+                <table class="table table-striped">
+                    <tbody>
                     <tr>
-                        <th><i class="fas fa-id-badge"></i>  الدكتور:</th>
+                        <th><i class="fas fa-id-badge"></i> {{ __('messages.doctor') }}:</th>
                         <td>{{ $doctor->name }}</td>
                     </tr>
                     <tr>
-                        <th><i class="fas fa-envelope"></i> البريد الإلكتروني:</th>
+                        <th><i class="fas fa-envelope"></i> {{ __('messages.email') }}:</th>
                         <td>{{ $doctor->email }}</td>
                     </tr>
                     <tr>
-                        <th><i class="fas fa-phone-alt"></i> رقم الهاتف:</th>
+                        <th><i class="fas fa-phone-alt"></i> {{ __('messages.phone') }}:</th>
                         <td>{{ $doctor->phone_number }}</td>
                     </tr>
                     <tr>
-                        <th><i class="fas fa-clinic-medical"></i> القسم:</th>
+                        <th><i class="fas fa-clinic-medical"></i> {{ __('messages.section') }}:</th>
                         <td>{{ $doctor->section->name }}</td>
                     </tr>
                     <tr>
-                        <th><i class="fas fa-calendar-alt"></i> تاريخ الإنشاء:</th>
+                        <th><i class="fas fa-calendar-alt"></i> {{ __('messages.creation_date') }}:</th>
                         <td>{{ $doctor->created_at->format('Y-m-d H:i') }}</td>
                     </tr>
-
-
                     <tr>
-                        <th><i class="fas fa-edit"></i> آخر تحديث:</th>
+                        <th><i class="fas fa-edit"></i> {{ __('messages.last_update') }}:</th>
                         <td>{{ $doctor->updated_at->format('Y-m-d H:i') }}</td>
                     </tr>
-                </tbody>
-            </table>
-        </div>
+                    </tbody>
+                </table>
+            </div>
 
-        <!-- زر العودة أسفل البطاقة -->
-        <div class="card-footer text-center">
-            <a href="{{ route('doctor.profile.edit') }}" class="btn btn-primary">
-                <i class="fas fa-list"></i> تعديل البروفايل
-            </a>
+            <!-- Footer Button -->
+            <div class="card-footer text-center">
+                <a href="{{ route('doctor.profile.edit') }}" class="btn btn-primary">
+                    <i class="fas fa-list"></i> {{ __('messages.edit_profile') }}
+                </a>
+            </div>
         </div>
     </div>
-</div>
 
 <!-- تأثير CSS للوميض -->
 <style>

@@ -16,8 +16,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Pages</h4><span
-                        class="text-muted mt-1 tx-13 mr-2 mb-0">/ Empty</span>
+                <h4 class="content-title mb-0 my-auto">{{ __('messages.profile') }}</h4>
+                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('messages.edit') }}</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
@@ -53,120 +53,113 @@
 @endsection
 
 @section('content')
-<div class="container my-5">
-    <div class="card shadow-lg border-0">
-        <!-- العنوان مع زر العودة -->
-        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-            <h3 class="mb-0">تعديل الملف الشخصي</h3>
-            <a href="{{ route('doctor.profile') }}" class="btn btn-light btn-sm">
-                <i class="fas fa-arrow-left"></i> رجوع
-            </a>
-        </div>
+    <div class="container my-5">
+        <div class="card shadow-lg border-0">
+            <!-- العنوان مع زر العودة -->
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">{{ __('messages.edit_profile') }}</h3>
+                <a href="{{ route('doctor.profile') }}" class="btn btn-light btn-sm">
+                    <i class="fas fa-arrow-left"></i> {{ __('messages.back') }}
+                </a>
+            </div>
 
-        <!-- نموذج التعديل -->
-        <div class="card-body">
-            <form action="{{ route('doctor.profile.update') }}" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
-                @csrf
+            <!-- نموذج التعديل -->
+            <div class="card-body">
+                <form action="{{ route('doctor.profile.update') }}" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+                    @csrf
 
+                    <!-- الاسم -->
+                    <div class="form-group mb-3">
+                        <label for="name" class="form-label"><i class="fas fa-user"></i> {{ __('messages.name') }}</label>
+                        <input type="text" name="name" id="name" class="form-control" value="{{ $doctor->name }}" required>
+                        <div class="invalid-feedback">{{ __('messages.enter_full_name') }}</div>
+                    </div>
 
-                <!-- الاسم -->
-                <div class="form-group mb-3">
-                    <label for="name" class="form-label"><i class="fas fa-user"></i> الاسم</label>
-                    <input type="text" name="name" id="name" class="form-control" value="{{ $doctor->name }}" required>
-                    <div class="invalid-feedback">يرجى إدخال الاسم الكامل.</div>
-                </div>
+                    <!-- البريد الإلكتروني -->
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label"><i class="fas fa-envelope"></i> {{ __('messages.email') }}</label>
+                        <input type="email" name="email" id="email" class="form-control" value="{{ $doctor->email }}" required>
+                        <div class="invalid-feedback">{{ __('messages.enter_valid_email') }}</div>
+                    </div>
 
-                <!-- البريد الإلكتروني -->
-                <div class="form-group mb-3">
-                    <label for="email" class="form-label"><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
-                    <input type="email" name="email" id="email" class="form-control" value="{{ $doctor->email }}" required>
-                    <div class="invalid-feedback">يرجى إدخال البريد الإلكتروني الصحيح.</div>
-                </div>
+                    <!-- كلمة المرور -->
+                    <div class="form-group mb-3">
+                        <label for="password" class="form-label"><i class="fas fa-lock"></i> {{ __('messages.password_optional') }}</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="{{ __('messages.leave_blank') }}">
+                    </div>
 
-                <!-- كلمة المرور -->
-                <div class="form-group mb-3">
-                    <label for="password" class="form-label"><i class="fas fa-lock"></i> كلمة المرور (اختياري)</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="اتركه فارغاً إذا لم ترغب بالتغيير">
-                </div>
+                    <!-- رقم الهاتف -->
+                    <div class="form-group mb-3">
+                        <label for="phone_number" class="form-label"><i class="fas fa-phone-alt"></i> {{ __('messages.phone_number') }}</label>
+                        <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ $doctor->phone_number }}" required>
+                        <div class="invalid-feedback">{{ __('messages.enter_phone_number') }}</div>
+                    </div>
 
-                <!-- رقم الهاتف -->
-                <div class="form-group mb-3">
-                    <label for="phone_number" class="form-label"><i class="fas fa-phone-alt"></i> رقم الهاتف</label>
-                    <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ $doctor->phone_number }}" required>
-                    <div class="invalid-feedback">يرجى إدخال رقم الهاتف.</div>
-                </div>
+                    <!-- القسم -->
+                    <div class="form-group mb-3">
+                        <label for="section_id" class="form-label"><i class="fas fa-clinic-medical"></i> {{ __('messages.section') }}</label>
+                        <input name="section_id" id="section_id" class="form-control" value="{{ $doctor->section->name }}" readonly required>
+                        <div class="invalid-feedback">{{ __('messages.select_section') }}</div>
+                    </div>
 
-                <!-- القسم -->
-                <div class="form-group mb-3">
-                    <label for="section_id" class="form-label"><i class="fas fa-clinic-medical"></i> القسم</label>
-                    <select name="section_id" id="section_id" class="form-control" required>
-                        @foreach($sections as $section)
-                            <option value="{{ $section->id }}" {{ $doctor->section_id == $section->id ? 'selected' : '' }}>
-                                {{ $section->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <div class="invalid-feedback">يرجى اختيار القسم المناسب.</div>
-                </div>
+                    <!-- الصورة الشخصية -->
+                    <div class="form-group mb-3 text-center">
+                        <label for="photo" class="form-label d-block"><i class="fas fa-camera"></i> {{ __('messages.profile_photo') }}</label>
+                        @if($doctor->image)
+                            <img src="{{ asset('Dashboard/img/doctors/'.'/'.$doctor->image->filename) }}" alt="{{ __('messages.current_photo') }}" class="img-thumbnail mb-3" style="width: 150px; height: 150px;">
+                        @else
+                            <img src="{{ asset('Dashboard/6.jpg') }}" alt="{{ __('messages.default_photo') }}" class="img-thumbnail mb-3" style="width: 150px; height: 150px;">
+                        @endif
+                        <input type="file" name="photo" id="photo" class="form-control-file">
+                        <small class="text-muted">{{ __('messages.select_new_photo') }}</small>
+                    </div>
 
-                <!-- الصورة الشخصية -->
-                <div class="form-group mb-3 text-center">
-                    <label for="photo" class="form-label d-block"><i class="fas fa-camera"></i> الصورة الشخصية</label>
-                    @if($doctor->image)
-                        <img src="{{ asset('Dashboard/img/doctors/'.'/'.$doctor->image->filename) }}" alt="الصورة الحالية" class="img-thumbnail mb-3" style="width: 150px; height: 150px;">
-                    @else
-                        <img src="{{ asset('Dashboard/6.jpg') }}" alt="الصورة الافتراضية" class="img-thumbnail mb-3" style="width: 150px; height: 150px;">
-                    @endif
-                    <input type="file" name="photo" id="photo" class="form-control-file">
-                    <small class="text-muted">اختر صورة جديدة لتحديث الصورة الشخصية.</small>
-                </div>
-
-                <!-- زر الحفظ مع حركة -->
-                <div class="text-center">
-                    <button type="submit" class="btn btn-success btn-lg save-btn">
-                        <i class="fas fa-save"></i> حفظ التعديلات
-                    </button>
-                </div>
-            </form>
+                    <!-- زر الحفظ مع حركة -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success btn-lg save-btn">
+                            <i class="fas fa-save"></i> {{ __('messages.save_changes') }}
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- تأثيرات CSS -->
-<style>
-    /* زر الحفظ بتأثير النبض */
-    .save-btn {
-        transition: background-color 0.3s ease, transform 0.3s ease;
-    }
+    <!-- تأثيرات CSS -->
+    <style>
+        /* زر الحفظ بتأثير النبض */
+        .save-btn {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
 
-    .save-btn:hover {
-        background-color: #28a745;
-        transform: scale(1.05);
-    }
+        .save-btn:hover {
+            background-color: #28a745;
+            transform: scale(1.05);
+        }
 
-    /* حركة حقول الإدخال */
-    input:focus, select:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    }
-</style>
+        /* حركة حقول الإدخال */
+        input:focus, select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+    </style>
 
-<!-- JavaScript للتحقق من المدخلات -->
-<script>
-    (function () {
-        'use strict'
-        const forms = document.querySelectorAll('.needs-validation')
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-                form.classList.add('was-validated')
-            }, false)
-        })
-    })()
-</script>
+    <!-- JavaScript للتحقق من المدخلات -->
+    <script>
+        (function () {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
 @endsection
 
 

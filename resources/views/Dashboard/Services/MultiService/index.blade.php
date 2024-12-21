@@ -12,12 +12,12 @@
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
-        <div class="my-auto">
-            <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Tables</h4>
-                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Data Tables</span>
-            </div>
+        <div class="services-section">
+            <h3>{{ __('messages.all_services') }}</h3>
+            <p>{{ __('messages.services_description') }}</p>
+
         </div>
+
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
                 <button type="button" class="btn btn-info btn-icon ml-2">
@@ -58,76 +58,67 @@
 @section('content')
     <!-- row opened -->
     <div class="row row-sm">
-
         <!-- إضافة زر لإضافة خدمة جديدة -->
         <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#add">
-            <i class="mdi mdi-plus-circle-outline"></i> Create Services
+            <i class="mdi mdi-plus-circle-outline"></i> {{ __('messages.add_service') }}
         </button>
-
         @include('Dashboard.Services.MultiService.add')
 
         <!-- بداية الجدول -->
         <div class="col-xl-12">
             <div class="card mg-b-20">
-                <div class="card-header pb-0">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0">Service Management</h4>
-                        <i class="mdi mdi-dots-horizontal text-gray"></i>
-                    </div>
-                    <p class="tx-12 tx-gray-500 mb-2">Manage all the services here. You can update or delete services
-                        easily. <a href="">Learn more</a></p>
-                </div>
+
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example" class="table table-bordered table-hover text-md-nowrap">
                             <thead>
-                            <tr>
-                                <th class="border-bottom-0">الاسم</th>
-                                <th class="border-bottom-0">الملاحظات</th>
-                                <th class="border-bottom-0">الكمية</th>
-                                <th class="border-bottom-0">السعر قبل الخصم</th>
-                                <th class="border-bottom-0">قيمة الخصم</th>
-                                <th class="border-bottom-0">السعر بعد الخصم</th>
-                                <th class="border-bottom-0">الضريبة</th>
-                                <th class="border-bottom-0">السعر النهائي</th>
-                                <th class="border-bottom-0">الإجمالي مع الضريبة</th>
-                                <th class="border-bottom-0">العمليات</th>
-                            </tr>
+                                <tr>
+                                    <th class="border-bottom-0">{{ __('messages.name') }}</th>
+                                    <th class="border-bottom-0">{{ __('messages.notes') }}</th>
+                                    <th class="border-bottom-0">{{ __('messages.quantity') }}</th>
+                                    <th class="border-bottom-0">{{ __('messages.price_before_discount') }}</th>
+                                    <th class="border-bottom-0">{{ __('messages.discount_value') }}</th>
+                                    <th class="border-bottom-0">{{ __('messages.price_after_discount') }}</th>
+                                    <th class="border-bottom-0">{{ __('messages.tax') }}</th>
+                                    <th class="border-bottom-0">{{ __('messages.final_price') }}</th>
+                                    <th class="border-bottom-0">{{ __('messages.total_with_tax') }}</th>
+                                    <th class="border-bottom-0">{{ __('messages.actions') }}</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            @foreach($multiservices as $service)
-                                <tr class="text-center">
-                                    <td>{{ $service->name }}</td>
-                                    <td>{{ $service->notes }}</td>
-                                    <td>{{ $service->service_group->sum('pivot.quantity') }}</td> {{-- جمع كمية العناصر من الجدول الوسيط --}}
-                                    <td>{{ $service->total_before_discount }}</td>
-                                    <td>{{ $service->discount_value }}</td>
-                                    <td>{{ $service->total_after_discount }}</td>
-                                    <td>{{ $service->tax_rate }}%</td>
-                                    <td>{{ $service->total_with_tax }}</td>
-                                    <td>{{$service->total_with_tax}}</td>
-                                    <td>
-                                        <!-- زر التحديث -->
-                                        <button type="button" class="btn btn-outline-info btn-sm mb-2"
-                                                onclick="func2()">
-                                            <i class="mdi mdi-pencil"></i> Update
-                                        </button>
+                                @foreach($multiservices as $service)
+                                    <tr class="text-center">
+                                        <td>{{ $service->name }}</td>
+                                        <td>{{ $service->notes }}</td>
+                                        <td>{{ $service->service_group->sum('pivot.quantity') }}</td>
+                                        <td>{{ $service->total_before_discount }}</td>
+                                        <td>{{ $service->discount_value }}</td>
+                                        <td>{{ $service->total_after_discount }}</td>
+                                        <td>{{ $service->tax_rate }}%</td>
+                                        <td>{{ $service->total_with_tax }}</td>
+                                        <td>{{ $service->total_with_tax }}</td>
+                                        <td>
+                                            <div class="d-inline-flex">
+                                                <!-- زر التحديث -->
+                                                <button type="button" class="btn btn-outline-info btn-sm mx-1" onclick="func2()">
+                                                    <i class="mdi mdi-pencil"></i> {{ __('messages.update') }}
+                                                </button>
+                                                <script>
+                                                    function func2() {
+                                                        window.location.href = "{{ route('multi-services.edit', ['multi_service' => $service->id]) }}";
+                                                    }
+                                                </script>
 
-                                        <script>
-                                            function func2() {
-                                                window.location.href = "{{ route('multi-services.edit', ['multi_service' => $service->id]) }}";
-                                            }
-                                        </script>
+                                                <!-- زر الحذف -->
+                                                <button type="button" class="btn btn-outline-danger btn-sm mx-1" data-toggle="modal" data-target="#delete{{$service->id}}">
+                                                    <i class="mdi mdi-delete"></i> {{ __('messages.delete') }}
+                                                </button>
+                                            </div>
+                                        </td>
 
-                                        <!-- زر الحذف -->
-                                        <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal"
-                                                data-target="#delete{{$service->id}}">
-                                            <i class="mdi mdi-delete"></i> Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                                @include('Dashboard.Services.MultiService.delete')
-                            @endforeach
+                                    </tr>
+                                    @include('Dashboard.Services.MultiService.delete')
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -135,8 +126,8 @@
             </div>
         </div>
         <!-- نهاية الجدول -->
-
     </div>
+
 @endsection
 
 @section('js')

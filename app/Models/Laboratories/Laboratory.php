@@ -30,11 +30,12 @@ class Laboratory extends Model
         return $this->belongsTo(Doctor::class,'doctor_id','id');
     }
 
-    public function image(){
+    public function images(){
 
-        return $this->morphOne(Image::class,'imageable');
+        return $this->morphMany(Image::class,'imageable');
 
     }
+
 
     public function stuff()
     {

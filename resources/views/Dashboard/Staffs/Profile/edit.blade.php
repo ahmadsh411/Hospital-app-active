@@ -1,4 +1,4 @@
-@extends('Dashboard.layouts.Admin.master')
+@extends('Dashboard.layouts.Staff.master_staff')
 
 @section('css')
     <link href="{{URL::asset('Dashboard/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet"/>
@@ -16,13 +16,13 @@
         }
     </style>
 @endsection
-
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Staff</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Edit Profile</span>
+                <h4 class="content-title mb-0 my-auto">{{ __('messages.staff') }}</h4>
+                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('messages.edit_profile') }}</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
@@ -56,43 +56,44 @@
 @endsection
 
 @section('content')
+
     <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow-lg">
                     <div class="card-header bg-gradient text-white text-center">
-                        <h2 class="font-weight-bold">تعديل الملف الشخصي</h2>
+                        <h2 class="font-weight-bold">{{ __('messages.edit_profile') }}</h2>
                     </div>
                     <div class="card-body p-4">
-                        <form action="{{route('staff.update-profile')}}" method="POST">
+                        <form action="{{ route('staff.update-profile') }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="name" class="form-label">الاسم</label>
+                                    <label for="name" class="form-label">{{ __('messages.name') }}</label>
                                     <input type="text" class="form-control border-primary" id="name" name="name" value="{{ $staff->name }}" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="email" class="form-label">البريد الإلكتروني</label>
+                                    <label for="email" class="form-label">{{ __('messages.email') }}</label>
                                     <input type="email" class="form-control border-primary" id="email" name="email" value="{{ $staff->email }}" required>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="phone" class="form-label">رقم الهاتف</label>
+                                    <label for="phone" class="form-label">{{ __('messages.phone') }}</label>
                                     <input type="text" class="form-control border-primary" id="phone" name="phone" value="{{ $staff->phone }}" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="address" class="form-label">العنوان</label>
+                                    <label for="address" class="form-label">{{ __('messages.address') }}</label>
                                     <input type="text" class="form-control border-primary" id="address" name="address" value="{{ $staff->address }}" required>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="gender_id" class="form-label">الجنس</label>
-                                    <select class="form-select border-primary" id="gender_id" name="gender_id" required>
+                                    <label for="gender_id" class="form-label">{{ __('messages.gender') }}</label>
+                                    <select class="form-control border-primary" id="gender_id" name="gender_id" required>
                                         @foreach($genders as $gender)
                                             <option value="{{ $gender->id }}" {{ $staff->gender_id == $gender->id ? 'selected' : '' }}>
                                                 {{ $gender->gender_name }}
@@ -101,20 +102,13 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="section_id" class="form-label">القسم</label>
-                                    <select class="form-select border-primary" id="section_id" name="section_id" required>
-                                        @foreach($sections as $section)
-                                            <option value="{{ $section->id }}" {{ $staff->section_id == $section->id ? 'selected' : '' }}>
-                                                {{ $section->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    <label for="section_id" class="form-label">{{ __('messages.section') }}</label>
+                                    <input class="form-control border-primary" id="section_id" name="section_id" required value="{{ $staff->section->name }}" readonly>
                                 </div>
                             </div>
 
                             <div class="text-center mt-4">
-                                <button type="submit" class="btn btn-primary px-4">حفظ التعديلات</button>
-                                <a href="{{ url('/staff') }}" class="btn btn-secondary px-4">إلغاء</a>
+                                <button type="submit" class="btn btn-primary px-4">{{ __('messages.save_changes') }}</button>
                             </div>
                         </form>
                     </div>
@@ -123,6 +117,7 @@
         </div>
     </div>
 @endsection
+
 
 @section('js')
     <script src="{{URL::asset('Dashboard/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>

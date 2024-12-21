@@ -19,9 +19,10 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Payment</h4><span
-                        class="text-muted mt-1 tx-13 mr-2 mb-0">/ List</span>
+                <h4 class="content-title mb-0 my-auto">{{ __('messages.Payment') }}</h4>
+                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('messages.List') }}</span>
             </div>
+
         </div>
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
@@ -56,75 +57,62 @@
 @endsection
 @section('content')
     @php
-        $i=1;
+        $i = 1;
     @endphp
     @include('Dashboard.messages_allert')
     @include('Dashboard.Payments.create')
+
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createPaymentModal">
-        Add a Payment
+        {{ __('messages.Add a Payment') }}
     </button>
-    <br>
-    <br>
-    <br>
-    <br>
+    <br><br><br><br>
 
     <div class="row row-sm">
-
         <!--div-->
         <div class="col-xl-12">
             <div class="card mg-b-20">
-                <div class="card-header pb-0">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0">Bordered Table</h4>
-                        <i class="mdi mdi-dots-horizontal text-gray"></i>
-                    </div>
-                    <p class="tx-12 tx-gray-500 mb-2">Example of Valex Bordered Table.. <a href="">Learn more</a></p>
-                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example" class="table key-buttons text-md-nowrap">
                             <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">Patient Name</th>
-                                <th class="border-bottom-0">Amount Of Money</th>
-                                <th class="border-bottom-0">Invoice Date</th>
-                                <th class="border-bottom-0">Statement</th>
-                                <th class="border-bottom-0">Operations</th>
-
+                                <th class="border-bottom-0">{{ __('messages.Patient Name') }}</th>
+                                <th class="border-bottom-0">{{ __('messages.Amount Of Money') }}</th>
+                                <th class="border-bottom-0">{{ __('messages.Invoice Date') }}</th>
+                                <th class="border-bottom-0">{{ __('messages.Statement') }}</th>
+                                <th class="border-bottom-0">{{ __('messages.Operations') }}</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($payments as $payment)
                                 <tr>
-                                    <td>{{$i++}}</td>
-                                    <td>{{$payment->patient->name}}</td>
-                                    <td>{{$payment->debit}}</td>
-                                    <td>{{$payment->date}}</td>
-                                    <td>{{$payment->description}}</td>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $payment->patient->name }}</td>
+                                    <td>{{ $payment->debit }}</td>
+                                    <td>{{ $payment->date }}</td>
+                                    <td>{{ $payment->description }}</td>
                                     <td>
                                         <button type="button" class="btn btn-primary" onclick="func2()">
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         <script>
                                             function func2() {
-                                                window.location.href = "{{route('paiment-box.edit',['paiment_box'=>$payment->id])}}"
+                                                window.location.href = "{{ route('paiment-box.edit', ['paiment_box' => $payment->id]) }}"
                                             }
                                         </script>
                                         <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                data-target="#deletePayment{{$payment->id}}">
+                                                data-target="#deletePayment{{ $payment->id }}">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                         <button type="button" class="btn btn-success" onclick="print()">
                                             <i class="fas fa-print"></i>
                                         </button>
-
                                         <script>
                                             function print() {
-                                                window.location.href = "{{route('paiment-box.show',['paiment_box'=>$payment->id])}}"
+                                                window.location.href = "{{ route('paiment-box.show', ['paiment_box' => $payment->id]) }}"
                                             }
                                         </script>
-
                                     </td>
                                 </tr>
                                 @include('Dashboard.Payments.delete')
@@ -136,19 +124,9 @@
             </div>
         </div>
         <!--/div-->
-
-        <!--div-->
-
-        <!-- /row -->
     </div>
-
-
-    <!-- row closed -->
-    </div>
-    <!-- Container closed -->
-    </div>
-    <!-- main-content closed -->
 @endsection
+
 @section('js')
     <!-- Internal Data tables -->
     <script src="{{URL::asset('Dashboard/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>

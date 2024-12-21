@@ -15,8 +15,10 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Invoices</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Doctor Invoices</span>
+                <h4 class="content-title mb-0 my-auto">{{ __('messages.edit') }}</h4>
+                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('messages.laboratory') }}</span>
             </div>
+
         </div>
     </div>
     <!-- breadcrumb -->
@@ -24,49 +26,47 @@
 
 @section('content')
 
-    <form method="POST" action="{{route('laboratories.update',['laboratory'=>$laboratory->id])}}"
-          enctype="multipart/form-data">
-
+    <form method="POST" action="{{ route('laboratories.update', ['laboratory' => $laboratory->id]) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
-
+        <!-- Description Field -->
         <div class="form-group">
-            <label for="editInput">تعديل الحقل</label>
-            <textarea type="text" class="form-control" name="description" id="editInput"
-                      placeholder="أدخل التعديلات">{{ $laboratory->description }}</textarea>
+            <label for="editInput">{{ __('messages.edit_field') }}</label>
+            <textarea type="text" class="form-control" name="description" id="editInput" placeholder="{{ __('messages.enter_changes') }}">{{ $laboratory->description }}</textarea>
             <input type="hidden" name="invoice_id" value="{{ $laboratory->invoice->id }}">
             <input type="hidden" name="doctor_id" value="{{ $laboratory->doctor->id }}">
             <input type="hidden" name="patient_id" value="{{ $laboratory->patient->id }}">
-            <input type="hidden" value="{{$laboratory->id}}">
+            <input type="hidden" value="{{ $laboratory->id }}">
         </div>
 
+        <!-- Upload Image Field -->
         <div class="form-group">
             <label for="image">
-                <i class="fas fa-upload"></i> رفع صورة للتحيل
+                <i class="fas fa-upload"></i> {{ __('messages.upload_analysis_image') }}
             </label>
-            <input type="file" class="form-control" id="image" name="image" accept="image/*"
-                   onchange="previewImage(event)">
+            <input type="file" class="form-control" id="image" name="image" accept="image/*" onchange="previewImage(event)">
         </div>
 
-        <!-- مكان عرض الصورة الحالية -->
+        <!-- Current Image Display -->
         <div class="form-group text-center">
-            @if(isset($laboratory->image))
-                <img id="imagePreview"
-                     src="{{ asset('Dashboard/img/Laboratory/'.$laboratory->patient->name.'/'.$laboratory->id.'/'.$laboratory->image->filename) }}"
-                     alt="صورة الأشعة الحالية"
-                     style="max-width: 100%; height: auto; border: 2px solid #ddd; padding: 5px; margin-top: 10px;">
+            @if(isset($laboratory->images))
+                @foreach($laboratory->images as $image)
+                    <img src="{{ asset('Dashboard/img/Laboratory/Send/'.$laboratory->patient->name.'/'.$laboratory->id.'/'.$image->filename) }}"
+                         style="width: 100px; margin-right: 10px;">
+                @endforeach
             @endif
 
-            <img id="imagePreview12" src="" alt="معاينة الصورة"
+            <img id="imagePreview12" src="" alt="{{ __('messages.image_preview') }}"
                  style="max-width: 100%; height: 75%; display: none; border: 2px solid #ddd; padding: 5px; margin-top: 10px;">
         </div>
 
+        <!-- Submit Button -->
         <div class="modal-footer">
-
-            <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
+            <button type="submit" class="btn btn-primary">{{ __('messages.save_changes') }}</button>
         </div>
     </form>
+
 
 @endsection
 

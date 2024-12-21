@@ -5,7 +5,7 @@
 
             <!-- Modal Header with gradient background -->
             <div class="modal-header" style="background: linear-gradient(135deg, #ff4d4d, #ff0000); color: white;">
-                <h5 class="modal-title" id="deleteStaffModalLabel">Confirm Deletion</h5>
+                <h5 class="modal-title" id="deleteStaffModalLabel">{{ __('messages.Confirm Deletion') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,16 +14,18 @@
             <!-- Modal Body with animated icon and smooth color change -->
             <div class="modal-body text-center" style="background-color: #fff8f8; transition: background-color 0.3s ease;">
                 <i class="fas fa-exclamation-triangle" style="font-size: 40px; color: #ff4d4d; margin-bottom: 15px; animation: shake 0.7s infinite alternate;"></i>
-                <p style="color: #ff4d4d; font-size: 18px;">Are you sure you want to delete this staff member: <strong>{{ $staff->name }}</strong>?</p>
+                <p style="color: #ff4d4d; font-size: 18px;">
+                    {{ __('messages.Are you sure you want to delete this staff member') }}: <strong>{{ $staff->name }}</strong>?
+                </p>
             </div>
 
             <!-- Modal Footer -->
             <div class="modal-footer" style="background-color: #fff0f0; transition: background-color 0.3s ease;">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="transition: all 0.3s;">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="transition: all 0.3s;">{{ __('messages.Cancel') }}</button>
                 <form action="{{ route('staff-hospital.destroy',['staff_hospital'=> $staff->id]) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger delete-btn" style="background-color: #ff4d4d; border: none; transition: all 0.3s;">Delete</button>
+                    <button type="submit" class="btn btn-danger delete-btn" style="background-color: #ff4d4d; border: none; transition: all 0.3s;">{{ __('messages.Delete') }}</button>
                 </form>
             </div>
         </div>

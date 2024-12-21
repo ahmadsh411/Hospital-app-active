@@ -3,26 +3,26 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Service</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="exampleModalLabel">@lang('dashboard.add_service')</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="@lang('dashboard.close')">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form action="{{route('services.store')}}" method="POST" autocomplete="off">
             <div class="modal-body">
-                   @csrf
-                  <label>Service Name:</label>
-                  <input type="text" name="name" placeholder="Enter The Service Name" class="form-control"/>
+                @csrf
+                <label>@lang('dashboard.service_name'):</label>
+                <input type="text" name="name" placeholder="@lang('dashboard.enter_service_name')" class="form-control"/>
                 <br>
-                <label>Service Price:</label>
-                <input type="text" name="price" placeholder="Enter The Service Price" class="form-control"/>
-                 <label>Description:</label>
-                <textarea cols="10" name="description"  class="form-control">
-                </textarea>
+                <label>@lang('dashboard.service_price'):</label>
+                <input type="text" name="price" placeholder="@lang('dashboard.enter_service_price')" class="form-control"/>
+                <br>
+                <label>@lang('dashboard.description'):</label>
+                <textarea cols="10" name="description" class="form-control" placeholder="@lang('dashboard.enter_description')"></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Done</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('dashboard.close')</button>
+                <button type="submit" class="btn btn-primary">@lang('dashboard.done')</button>
             </div>
             </form>
         </div>

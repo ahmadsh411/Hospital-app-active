@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.12",
         "mcamara/laravel-localization": "^2.0",
+        "pusher/pusher-php-server": "^7.2",
         "webklex/laravel-imap": "^4.1",
         "yoeunes/toastr": "^2.3"
     },

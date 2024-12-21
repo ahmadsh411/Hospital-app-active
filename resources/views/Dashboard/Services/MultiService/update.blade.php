@@ -35,106 +35,93 @@
 @endsection
 
 @section('content')
-    <div class="card mt-4">
-        <div class="card-header">
-            <div class="row justify-content-between align-items-center">
-                <!-- العمود الخاص بالعنوان إلى اليمين -->
-                <div class="col-auto text-right">
-                    <h5>Update Service</h5>
-                </div>
-
-                <!-- العمود الخاص بالقيمة إلى اليسار -->
-                <div class="card" style="background-color: #f1f9ff; border: 1px solid #0a7ffb;">
-                    <div class="card-body">
-                        <div class="row">
-                            <!-- القسم باليسار مع خلفية ولون مميز -->
-                            <div class="col-auto text-left">
-                                <label style="color: #0a7ffb; font-weight: bold;">Total with Tax</label>
-                                <h5 id="total_with_tax">{{ $multiservice->total_with_tax }}</h5>
-                            </div>
+<div class="card mt-4">
+    <div class="card-header">
+        <div class="row justify-content-between align-items-center">
+            <!-- العمود الخاص بالعنوان إلى اليمين -->
+            <div class="col-auto text-right">
+                <h5>{{ __('messages.update_service') }}</h5>
+            </div>
+            <!-- العمود الخاص بالقيمة إلى اليسار -->
+            <div class="card" style="background-color: #f1f9ff; border: 1px solid #0a7ffb;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-auto text-left">
+                            <label style="color: #0a7ffb; font-weight: bold;">{{ __('messages.total_with_tax') }}</label>
+                            <h5 id="total_with_tax">{{ $multiservice->total_with_tax }}</h5>
                         </div>
                     </div>
                 </div>
-
             </div>
-
-        </div>
-
-        <div class="card-body">
-            <!-- نموذج التحديث -->
-            <form action="{{ route('multi-services.update', ['multi_service' => $multiservice->id]) }}" method="POST"
-                  autocomplete="off" id="updateForm">
-                @csrf
-                @method('PUT')
-
-                <!-- إدخال اسم الخدمة -->
-                <div class="form-group">
-                    <label for="service_name">Service Name</label>
-                    <input type="text" id="service_name" name="name" value="{{ $multiservice->name }}"
-                           class="form-control">
-                </div>
-
-                <!-- ملاحظات حول الخدمة -->
-                <div class="form-group">
-                    <label for="service_notes">Service Notes</label>
-                    <textarea id="service_notes" name="notes" class="form-control">{{ $multiservice->notes }}</textarea>
-                </div>
-
-                <!-- حاوية الخدمات -->
-                <div id="services-container">
-                    @foreach($multiservice->service_group as $service)
-                        <div class="service-item row">
-                            <div class="col-md-6">
-                                <label for="service_id">Choose The Service</label>
-                                <select class="form-control" name="service_id[]" onchange="calculateTotal()">
-                                    @foreach($singleServices as $singleService)
-                                        <option value="{{ $singleService->id }}"
-                                                {{ $service->id == $singleService->id ? 'selected' : '' }}
-                                                data-price="{{ $singleService->price }}">
-                                            {{ $singleService->name }}: {{ $singleService->price }}$
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="quantity_">Quantity</label>
-                                <input type="number" name="quantity_[]" value="{{ $service->pivot->quantity }}"
-                                       class="form-control" oninput="calculateTotal()">
-                            </div>
-                            <div class="col-md-3">
-                                <button type="button" class="btn btn-danger mt-4 remove-service-btn"
-                                        onclick="removeService(this)">Remove Service
-                                </button>
-                            </div>
-                        </div>
-                        <hr>
-                    @endforeach
-                </div>
-
-                <!-- زر لإضافة خدمة جديدة -->
-                <button type="button" id="addServiceBtn" class="btn btn-primary mt-3">Add Another Service</button>
-
-                <br><br>
-
-                <!-- إدخال قيمة الخصم -->
-                <div class="form-group">
-                    <label for="discount_value">Discount Value</label>
-                    <input type="text" name="discount_value" value="{{ $multiservice->discount_value }}"
-                           class="form-control" id="discount_value" oninput="calculateTotal()">
-                </div>
-
-                <!-- إدخال نسبة الضريبة -->
-                <div class="form-group">
-                    <label for="tax_rate">Tax Rate</label>
-                    <input type="number" name="tax_rate" value="{{ $multiservice->tax_rate }}" class="form-control"
-                           id="tax_rate" oninput="calculateTotal()">
-                </div>
-
-                <!-- زر حفظ التحديث -->
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
         </div>
     </div>
+    <div class="card-body">
+        <!-- نموذج التحديث -->
+        <form action="{{ route('multi-services.update', ['multi_service' => $multiservice->id]) }}" method="POST" autocomplete="off" id="updateForm">
+            @csrf
+            @method('PUT')
+
+            <!-- إدخال اسم الخدمة -->
+            <div class="form-group">
+                <label for="service_name">{{ __('messages.service_name') }}</label>
+                <input type="text" id="service_name" name="name" value="{{ $multiservice->name }}" class="form-control">
+            </div>
+
+            <!-- ملاحظات حول الخدمة -->
+            <div class="form-group">
+                <label for="service_notes">{{ __('messages.service_notes') }}</label>
+                <textarea id="service_notes" name="notes" class="form-control">{{ $multiservice->notes }}</textarea>
+            </div>
+
+            <!-- حاوية الخدمات -->
+            <div id="services-container">
+                @foreach($multiservice->service_group as $service)
+                    <div class="service-item row">
+                        <div class="col-md-6">
+                            <label for="service_id">{{ __('messages.choose_service') }}</label>
+                            <select class="form-control" name="service_id[]" onchange="calculateTotal()">
+                                @foreach($singleServices as $singleService)
+                                    <option value="{{ $singleService->id }}"
+                                            {{ $service->id == $singleService->id ? 'selected' : '' }}
+                                            data-price="{{ $singleService->price }}">
+                                        {{ $singleService->name }}: {{ $singleService->price }}$
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="quantity_">{{ __('messages.quantity') }}</label>
+                            <input type="number" name="quantity_[]" value="{{ $service->pivot->quantity }}" class="form-control" oninput="calculateTotal()">
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-danger mt-4 remove-service-btn" onclick="removeService(this)">{{ __('messages.remove_service') }}</button>
+                        </div>
+                    </div>
+                    <hr>
+                @endforeach
+            </div>
+
+            <!-- زر لإضافة خدمة جديدة -->
+            <button type="button" id="addServiceBtn" class="btn btn-primary mt-3">{{ __('messages.add_another_service') }}</button>
+
+            <!-- إدخال قيمة الخصم -->
+            <div class="form-group">
+                <label for="discount_value">{{ __('messages.discount_value') }}</label>
+                <input type="text" name="discount_value" value="{{ $multiservice->discount_value }}" class="form-control" id="discount_value" oninput="calculateTotal()">
+            </div>
+
+            <!-- إدخال نسبة الضريبة -->
+            <div class="form-group">
+                <label for="tax_rate">{{ __('messages.tax_rate') }}</label>
+                <input type="number" name="tax_rate" value="{{ $multiservice->tax_rate }}" class="form-control" id="tax_rate" oninput="calculateTotal()">
+            </div>
+
+            <!-- زر حفظ التحديث -->
+            <button type="submit" class="btn btn-primary">{{ __('messages.update') }}</button>
+        </form>
+    </div>
+</div>
+
 
 @endsection
 

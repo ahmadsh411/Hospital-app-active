@@ -54,7 +54,7 @@ class StaffRepository implements StaffInterface
 
     public function edit($id)
     {
-        $staff=Staff::findFail($id);
+        $staff=Staff::findOrFail($id);
         $genders = Gender::all();
         $appointments=Appointment::all();
         $sections=Section::all();
@@ -65,7 +65,7 @@ class StaffRepository implements StaffInterface
     {
         try{
             DB::beginTransaction();
-            $staff = Staff::findOrFail($id);
+            $staff = Staff::find($id);
             $staff->name=$request->name;
             $staff->email=$request->email;
              if($request->password){

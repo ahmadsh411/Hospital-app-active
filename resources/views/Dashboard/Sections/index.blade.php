@@ -16,8 +16,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Pages</h4><span
-                        class="text-muted mt-1 tx-13 mr-2 mb-0">/ Empty</span>
+                <h4 class="content-title mb-0 my-auto">{{ __('dashboard.sections') }}</h4>
+                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('dashboard.all_sections') }}</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
@@ -57,7 +57,7 @@
     @endphp
     @include('Dashboard.messages_allert')
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">
-        Create Section
+        {{ __('dashboard.create_section') }}
     </button>
     <br>
     <br>
@@ -69,45 +69,35 @@
         <!--div-->
         <div class="col-xl-12">
             <div class="card mg-b-20">
-                <div class="card-header pb-0">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0">Bordered Table</h4>
-                        <i class="mdi mdi-dots-horizontal text-gray"></i>
-                    </div>
-                    <p class="tx-12 tx-gray-500 mb-2">Example of Valex Bordered Table.. <a href="">Learn more</a></p>
-                </div>
+               <br>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example" class="table key-buttons text-md-nowrap">
                             <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">Section Name</th>
-                                <th class="border-bottom-0">Description</th>
-                                <th class="border-bottom-0">Store Date</th>
-                                <th class="border-bottom-0">Operations</th>
-
+                                <th class="border-bottom-0">{{ __('dashboard.section_name') }}</th>
+                                <th class="border-bottom-0">{{ __('dashboard.description') }}</th>
+                                <th class="border-bottom-0">{{ __('dashboard.store_date') }}</th>
+                                <th class="border-bottom-0">{{ __('dashboard.operations') }}</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($sections as $section)
                                 <tr>
-                                    <td>{{$i++}}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        <a href="{{ route('section.show',['id'=>$section->id]) }}">{{$section->name}}</a>
+                                        <a href="{{ route('section.show', ['id' => $section->id]) }}">{{ $section->name }}</a>
                                     </td>
-                                    <td>{{\Illuminate\Support\Str::limit($section->description,50)}}</td>
-                                    <td>{{$section->created_at->diffForHumans()}}</td>
+                                    <td>{{ \Illuminate\Support\Str::limit($section->description, 50) }}</td>
+                                    <td>{{ $section->created_at->diffForHumans() }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#update{{$section->id}}">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#update{{ $section->id }}">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                data-target="#delete{{$section->id}}">
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{ $section->id }}">
                                             <i class="fas fa-trash"></i>
                                         </button>
-
                                     </td>
                                 </tr>
                                 @include('Dashboard.Sections.update')
@@ -119,6 +109,7 @@
                 </div>
             </div>
         </div>
+
         <!--/div-->
 
         <!--div-->

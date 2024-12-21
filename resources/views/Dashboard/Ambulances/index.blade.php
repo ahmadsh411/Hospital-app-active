@@ -16,8 +16,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Pages</h4><span
-                        class="text-muted mt-1 tx-13 mr-2 mb-0">/ Empty</span>
+                <h4 class="content-title mb-0 my-auto">{{ __('ambulance.title') }}</h4>
+                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ __('ambulance.empty') }}</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
@@ -57,81 +57,70 @@
     @endphp
     @include('Dashboard.messages_allert')
     <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addAmbulance">
-        Add Ambulance
+        {{ __('ambulance.add_ambulance') }}
     </button>
     <br>
     <br>
 
 
     <div class="row row-sm">
-
         <!--div-->
         <div class="col-xl-12">
             <div class="card mg-b-20">
-                <div class="card-header pb-0">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0">Bordered Table</h4>
-                        <i class="mdi mdi-dots-horizontal text-gray"></i>
-                    </div>
-                    <p class="tx-12 tx-gray-500 mb-2">Example of Valex Bordered Table.. <a href="">Learn more</a></p>
-                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example" class="table key-buttons text-md-nowrap">
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Car Number</th>
-                                <th>Car Model</th>
-                                <th>Date of Manufacture</th>
-                                <th>Driver Name</th>
-                                <th>Notes</th>
-                                <th>License Number</th>
-                                <th>Status</th>
-                                <th>Phone Number</th>
-                                <th>Actions</th>
-
+                                <th>{{ __('ambulance.car_number') }}</th>
+                                <th>{{ __('ambulance.car_model') }}</th>
+                                <th>{{ __('ambulance.date_of_manufacture') }}</th>
+                                <th>{{ __('ambulance.driver_name') }}</th>
+                                <th>{{ __('ambulance.notes') }}</th>
+                                <th>{{ __('ambulance.license_number') }}</th>
+                                <th>{{ __('ambulance.status') }}</th>
+                                <th>{{ __('ambulance.phone_number') }}</th>
+                                <th>{{ __('ambulance.actions') }}</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($ambulances  as $ambulance)
+                            @foreach($ambulances as $ambulance)
                                 <tr>
-                                    <td>{{$i++}} </td>
-
+                                    <td>{{ $i++ }}</td>
                                     <td>{{ $ambulance->car_number }}</td>
                                     <td>{{ $ambulance->car_model }}</td>
                                     <td>{{ $ambulance->date_of_manufacture }}</td>
                                     <td>{{ $ambulance->name }}</td>
                                     <td>{{ \Illuminate\Support\Str::limit($ambulance->notes, 16) }}</td>
                                     <td>{{ $ambulance->license_number }}</td>
-                                    <td>{{$ambulance->type=="1"?"Rent":"Owned"}}</td>
+                                    <td>{{ $ambulance->type == "1" ? __('ambulance.rent') : __('ambulance.owned') }}</td>
                                     <td>{{ $ambulance->phone_number }}</td>
                                     <td>
-
-
                                         <div class="dropdown">
                                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                                     data-target="#updateAmbulance{{ $ambulance->id }}">
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                             <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                    data-target="#delete{{$ambulance->id}}">
+                                                    data-target="#delete{{ $ambulance->id }}">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </div>
+                                    </td>
+                                </tr>
+                                @include('Dashboard.Ambulances.update')
+                                @include('Dashboard.Ambulances.delete')
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
-                    </td>
-                    </tr>
-                    @include('Dashboard.Ambulances.update')
-                    @include('Dashboard.Ambulances.delete')
-                    @endforeach
-                    </tbody>
-                    </table>
+                    @include('Dashboard.Ambulances.add')
                 </div>
-                @include('Dashboard.Ambulances.add')
             </div>
         </div>
     </div>
+
     <!--/div-->
 
     <!--div-->

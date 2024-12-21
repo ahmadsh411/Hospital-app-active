@@ -54,7 +54,7 @@ class DoctorAuthLoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::localizeURL('/'));
 }
 
 }
